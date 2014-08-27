@@ -1,0 +1,57 @@
+" Settings
+set hintchars=hjklasdf
+set gui=tabs
+set tabnumbers=true
+"Follow the selected hint on <Return>
+set followhints=1
+set scroll=3
+set hlsearch
+set animations=true
+set status="input,location,bookmark,ssl"
+set editor='urxvt -e vim'
+"order of completion list: t = tabs, l = location bar entries, s = search engine suggestions
+set complete=tsl
+"don't focus automatically the first textbox
+set focuscontent=true 
+set toolbars=noaddons,nobookmarks,nomenu,nonavigation,tabs
+
+" Commands
+command private -description "Opens Private Window" winopen -private about:newtab
+
+" Mappings
+map j <C-d>
+map k <C-u>
+map J <C-e>
+map K <C-y>
+map <A-h> gT
+map <A-l> gt
+map <A-S-h> :tabmove -1<CR>
+map <A-S-l> :tabmove +1<CR>
+map <C-x> :noscript toggletemp<CR>
+map <silent> <leader>h :set nohlsearch<CR>
+
+map <silent> <F2> :set toolbars=invmenu,invnavigation<CR>
+map <silent> <F3> :set toolbars=invbookmarks<CR>
+
+" Colorscheme
+colorscheme desert
+
+" Hide the status bar when using fullscreen
+autocmd Fullscreen .* :js toggleStatusbar()
+
+" Functions
+:js <<EOF
+function toggleStatusbar() {
+    var bb = document.getElementById('liberator-bottombar');
+    var fullscreen = (screen.width == window.innerWidth && screen.height == window.innerHeight);
+    if (!bb)
+        return;
+    if(!fullscreen) {
+        bb.style.height = '';
+        bb.style.overflow = '';
+    } else {
+        bb.style.height = '0px';
+        bb.style.overflow = 'hidden';
+    }
+}
+EOF

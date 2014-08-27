@@ -1,0 +1,16 @@
+set completion-ignore-case on
+set match-hidden-files off
+set mark-symlinked-directories on
+set show-all-if-ambiguous on
+set skip-completed-text on
+set colored-stats on 
+set show-mode-in-prompt on
+set keyseq-timeout 100
+
+# activate vi mode
+set editing-mode vi
+set keymap vi-insert
+# map Alt-. to paste last argument from last command in history
+"\e.":yank-last-arg
+# map ctrl-l to clear screen again
+Control-l: clear-screen

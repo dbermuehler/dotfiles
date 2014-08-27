@@ -1,0 +1,195 @@
+" Settings
+set nocompatible " required for Vundle and it is nevertheless a good idea to set
+set noswapfile 
+set backspace=indent,eol,start " allow backspacing over autoindent, line breaks and the beginning of insert mode
+set history=50
+set fileformats=unix,dos
+set mouse=a " enables mouse support in all modes
+set clipboard=unnamed " access X clipboard via the * and + register
+set hidden " Allow switching edited buffers without saving
+set scrolloff=3 " shows the next or previous 3 lines under or above the cursor
+"set listchars=tab:>-,trail:.,eol:$ " characters for tab, trailing spaces and eol when activate 'set list'
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " characters for tab, trailing spaces and eol when activate 'set list'
+set undofile " activates persistent undo
+set undodir=~/.vimundo/ " if undofile is activated, a directory is needed where the undofiles are stored
+set tags=./tags;
+set completeopt=menu,preview,longest
+set wildignorecase " completion on files in command mode is now case insensitive
+set autoread " if a file outside of the current vim session is modified it can be read in by :checktime, see :help E321
+set modelines=0 " don't need modelines and the potential security hazard
+set scroll=10
+set showmode
+set path=$PWD/**
+set shell=/bin/bash
+set visualbell
+
+" vim gui stuff
+set cursorline " highlight current cursor line
+"set cursorcolumn " highlight current cursor column
+set showmatch " show matching brackets/parenthesis
+set number
+set ruler " shows line numbers
+set showcmd " show entered command in normal mode
+set ttyfast " send more characters for redraws
+
+set wildmenu
+set wildmode=longest:full,full " first tab complete only longest common string, second tab complete to first element in list
+
+set wildignore+=*.aux,*.out,*.toc " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg " binary images
+set wildignore+=*.class " java class files
+
+" searching
+set incsearch " find as you type search
+set ignorecase " do not search case sensitive
+set smartcase " Case sensitive if we type an uppercase
+set hlsearch
+
+" tabs -> spaces
+set expandtab " tabs will be spaces
+set tabstop=4 " one tab is 4 spaces
+set shiftwidth=4 " indention will be 4 spaces
+set smarttab " backspace over tabs
+
+" Vundle Settings
+filetype off " Only temporary. Turned off because plugin loading is faster without it.
+set runtimepath+=~/.vim/bundle/vundle/
+call vundle#begin()
+
+" load Plugins
+Plugin 'gmarik/vundle'
+Plugin 'Raimondi/delimitMate'
+Plugin 'scrooloose/nerdtree'
+Plugin 'TaskList.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-commentary'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'tmhedberg/matchit'
+Plugin 'osyo-manga/vim-over'
+Plugin 'terryma/vim-smooth-scroll'
+Plugin 'inside/vim-search-pulse'
+Plugin 'takac/vim-hardtime'
+Plugin 'Matt-Deacalion/vim-systemd-syntax'
+
+if v:version >= 704
+    Plugin 'Shougo/neocomplete.vim'
+endif
+
+" Colorschemes
+Plugin 'w0ng/vim-hybrid'
+
+call vundle#end()
+
+" filetype
+set autoindent
+set copyindent " copy the previous indentation on autoindenting
+syntax on
+filetype plugin on " apply settings based on filetype
+filetype indent on " indention for known file extensions
+set omnifunc=syntaxcomplete#Complete
+
+" spell checking
+set thesaurus+=~/.vim/openthesaurus.txt
+set spelllang=de,en
+
+" Plugin settings
+let g:UltiSnipsEditSplit="horizontal"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+let g:tlWindowPosition = 1 " tasklist will show up at the bottom of the screen
+
+let g:NERDTreeWinSize = 25
+let g:NERDTreeWinPos = 'right'
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeHighlightCursorline = 1
+
+let g:hardtime_default_on = 0
+let g:hardtime_maxcount = 2
+let g:hardtime_timeout = 2000
+
+let g:neocomplete#enable_at_startup = 0
+let g:neocomplete#enable_smart_case = 1
+
+let g:tagbar_left = 1
+let g:tagbar_width = 25
+let g:tagbar_zoomwidth = 50
+let g:tagbar_autoclose = 1
+let g:tagbar_type_bib = {
+    \ 'ctagstype' : 'bibtex',
+    \ 'kinds'     : [
+        \ 'e:entries',
+        \ 'a:authors',
+        \ 't:titles',
+    \ ],
+    \ 'sort'    : 0,
+\ }
+
+" Custome key mappings
+map <F2> :Tagbar<CR>
+map <F3> :TaskListToggle<CR>
+map <F4> :NERDTreeToggle<CR>
+
+noremap <C-j> :bnext<CR>
+noremap <C-k> :bprevious<CR>
+noremap <C-h> :tabprevious<CR>
+noremap <C-l> :tabNext<CR>
+
+" use the arrow key to move between windows
+nnoremap <Left> <C-w>h
+nnoremap <Down> <C-w>j
+nnoremap <Up> <C-w>k
+nnoremap <Right> <C-w>l
+
+" clears the last search pattern to disable highlighting
+map <silent> <leader>h :let @/ = ""<CR>
+map <silent> <leader>s :setlocal invspell<CR>
+map <silent> <leader>r :source ~/.vimrc<CR>
+map <leader>p :set invpaste paste?<CR>
+
+" on the qwertz keyboard ctrl-y is a harder to reach then on a qwerty keyboard
+noremap <silent> <C-z> <C-y>
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 1)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 1)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 3)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 3)<CR>
+
+" TTY only
+if &term=~"linux"
+    set background=dark
+    colorscheme default
+    set norelativenumber
+else
+    set t_Co=256 " activate 256 color support if your terminal supports it and haven't configured to use it
+    colorscheme hybrid
+endif
+
+function! Run(...)
+    let args = ''
+    for i in a:000
+       let args = args . ' ' . i
+    endfor
+
+    if &filetype == "java"
+        execute "!java " . args . " " . expand("%:r")
+    elseif &filetype == "tex"
+        execute "silent !zathura --fork " . args . " " . expand("%:r") . ".pdf >& /dev/null"
+    elseif &filetype == "sh"
+        execute "!bash "  . args . " " . expand("%")
+    elseif &filetype == "python"
+        execute "!python " . args . " " . expand ("%")
+    elseif &filetype == "html"
+        execute "silent! !firefox " . expand("%") . " >& /dev/null"
+        execute "redraw!"
+    elseif &filetype == "markdown"
+        execute "silent! !firefox " . expand("%:r") . ".html >& /dev/null"
+        execute "redraw!"
+    else
+        echoerr "Error: Run() isn't defined for this filetype."
+    endif
+endfunction
+
+command! -nargs=* Run call Run(<f-args>)

@@ -1,0 +1,90 @@
+#--------------------------------------------------#
+#                     Variables                    #
+#--------------------------------------------------#
+
+export PS1='[\w] \$ '
+export PROMPT_DIRTRIM=3
+export EDITOR=vim
+export TERMINAL=urxvt
+export BROWSER=firefox
+
+#--------------------------------------------------#
+#                     Aliases                      #
+#--------------------------------------------------#
+
+alias ls='ls --color=auto'
+alias mkdir='mkdir -p'
+alias cp='cp -r' 
+alias grep='grep --color' 
+alias psgrep='ps x | grep'
+alias vim='vim -p'
+alias gh='history | grep'
+
+#--------------------------------------------------#
+#                 History Settings                 #
+#--------------------------------------------------#
+
+export HISTCONTROL="ignorespace:ignoredups"
+export HISTIGNORE='clear:history'
+export HISTSIZE="100000"
+export PROMPT_COMMAND='history -a'
+shopt -s histappend
+shopt -s histreedit
+shopt -s histverify
+shopt -s cmdhist
+bind space:magic-space
+
+#--------------------------------------------------#
+#                 Tab Completion                   #
+#--------------------------------------------------#
+
+if [ -f /etc/bash_completion ]; then
+   . /etc/bash_completion.d/*
+fi
+
+#--------------------------------------------------#
+#                    Functions                     #
+#--------------------------------------------------#
+
+# draw a horizontal line
+hr(){ 
+    yes -- ${@:-=} | tr -d $'\n' | head -c $COLUMNS
+}
+
+function cd() {
+    if [[ -z "$@" ]]; then
+        clear
+        builtin cd 
+    else
+        clear
+        builtin cd "$@" && pwd && ls;
+    fi
+}
+
+sp(){
+    if [[ "$1" = "-d" ]] ; then
+        [[ "$PWD" = "/tmp/scratchpad" ]] && cd
+        rm -r /tmp/scratchpad
+        return 0
+    fi
+    [[ ! -d /tmp/scratchpad ]] && mkdir /tmp/scratchpad
+    cd /tmp/scratchpad
+}
+
+#--------------------------------------------------#
+#                     Misc                         #
+#--------------------------------------------------#
+
+shopt -s autocd
+shopt -s globstar
+shopt -s cdspell
+shopt -s checkwinsize
+
+# deactivate flow control
+stty stop ''
+
+#--------------------------------------------------#
+#              Import local settings               #
+#--------------------------------------------------#
+
+. ~/.bashrc.local
