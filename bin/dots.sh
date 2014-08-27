@@ -5,7 +5,7 @@ unset DOTFOLDER
 unset OVERRIDE
 
 declare -A DOTFILES
-DOTFOLDER="$HOME/Alles_Moegliche/dotfiles"
+DOTFOLDER="$HOME/.dotfiles"
 
 DOTFILES=(
     ["$HOME/.bashrc"]="$DOTFOLDER/bash/bashrc"
