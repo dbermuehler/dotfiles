@@ -112,6 +112,29 @@ endfunction
 
 command! -nargs=* Run call Run(<f-args>)
 
+function! InvertBrackets()
+    let bracket = getline(".")[col(".")-1]
+    if bracket == "("
+        execute "normal!r)"
+    elseif bracket == ")"
+        execute "normal!r("
+    elseif bracket == "}"
+        execute "normal!r{"
+    elseif bracket == "{"
+        execute "normal!r}"
+    elseif bracket == "["
+        execute "normal!r]"
+    elseif bracket == "]"
+        execute "normal!r["
+    elseif bracket == "<"
+        execute "normal!r>"
+    elseif bracket == ">"
+        execute "normal!r<"
+    endif
+endfunction
+
+command! InvertBrackets call InvertBrackets()
+
 let $LOCALFILE=expand("~/.vimrc.local")
 if filereadable($LOCALFILE)
     source $LOCALFILE
