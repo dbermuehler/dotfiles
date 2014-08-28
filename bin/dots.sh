@@ -61,3 +61,5 @@ for link in "${!DOTFILES[@]}"; do
         fi
     fi
 done
+
+execAfterInstall

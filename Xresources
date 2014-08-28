@@ -1,4 +1,5 @@
-#include "/home/mitzekotze/.Xresources.local"
+! include don't expand ~ or the $HOME variable
+#include "../.Xresources.local"
 
 ! Xft Configs
 Xft.antialias: true

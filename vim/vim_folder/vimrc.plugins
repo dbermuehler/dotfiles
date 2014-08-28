@@ -1,0 +1,74 @@
+" Vundle Settings
+filetype off " Only temporary. Turned off because plugin loading is faster without it.
+set runtimepath+=~/.vim/bundle/vundle/
+call vundle#begin()
+
+" load Plugins
+Plugin 'gmarik/vundle'
+Plugin 'Raimondi/delimitMate'
+Plugin 'scrooloose/nerdtree'
+Plugin 'TaskList.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-commentary'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'tmhedberg/matchit'
+Plugin 'osyo-manga/vim-over'
+Plugin 'terryma/vim-smooth-scroll'
+Plugin 'inside/vim-search-pulse'
+Plugin 'takac/vim-hardtime'
+Plugin 'Matt-Deacalion/vim-systemd-syntax'
+
+if v:version >= 704
+    Plugin 'Shougo/neocomplete.vim'
+endif
+
+" Colorschemes
+Plugin 'w0ng/vim-hybrid'
+
+call vundle#end()
+filetype on
+
+" Plugin settings
+let g:UltiSnipsEditSplit="horizontal"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+let g:tlWindowPosition = 1 " tasklist will show up at the bottom of the screen
+
+let g:NERDTreeWinSize = 25
+let g:NERDTreeWinPos = 'right'
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeHighlightCursorline = 1
+
+let g:hardtime_default_on = 0
+let g:hardtime_maxcount = 2
+let g:hardtime_timeout = 2000
+
+let g:neocomplete#enable_at_startup = 0
+let g:neocomplete#enable_smart_case = 1
+
+let g:tagbar_left = 1
+let g:tagbar_width = 25
+let g:tagbar_zoomwidth = 50
+let g:tagbar_autoclose = 1
+let g:tagbar_type_bib = {
+    \ 'ctagstype' : 'bibtex',
+    \ 'kinds'     : [
+        \ 'e:entries',
+        \ 'a:authors',
+        \ 't:titles',
+    \ ],
+    \ 'sort'    : 0,
+\ }
+
+" Custome key mappings
+map <F2> :Tagbar<CR>
+map <F3> :TaskListToggle<CR>
+map <F4> :NERDTreeToggle<CR>
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 1)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 1)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 3)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 3)<CR>
