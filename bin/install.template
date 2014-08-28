@@ -20,7 +20,8 @@ DOTFILES=(
     ["${XDG_CONFIG_HOME:-$HOME/.config}/herbstluftwm/herbstcommander"]="$DOTFOLDER/herbstluftwm/herbstcommander"
 )
 
-#execAfterInstall() {
+execAfterInstall() {
+    :
 #    [ ! -d $HOME/.vim/bundle/ ] && mkdir $HOME/.vim/bundle/
 #    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-#}
+}
