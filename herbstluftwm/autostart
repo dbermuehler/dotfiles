@@ -35,6 +35,7 @@ hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind $Mod-x spawn dmenu_run -i -p "Execute:"
 hc keybind $Mod-m spawn herbstcommander.sh
+hc keybind $Mod-Return spawn ${TERMINAL:-xterm}
 
 # layouting
 hc keybind $Mod-r remove
