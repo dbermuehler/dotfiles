@@ -2,6 +2,7 @@
 #                     Variables                    #
 #--------------------------------------------------#
 
+export PATH="~/bin:${XDG_CONFIG_HOME:-$HOME/.config}/herbstluftwm/bin:$PATH"
 export PS1='[\w] \$ '
 export PROMPT_DIRTRIM=3
 export BROWSER=firefox

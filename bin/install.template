@@ -12,8 +12,7 @@ DOTFILES=(
     ["$HOME/.vimrc"]="$DOTFOLDER/vim/vimrc"
     ["$HOME/.vim"]="$DOTFOLDER/vim/vim_folder"
     ["$HOME/.ctags"]="$DOTFOLDER/ctags"
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/herbstluftwm/autostart"]="$DOTFOLDER/herbstluftwm/autostart"
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/herbstluftwm/herbstcommander"]="$DOTFOLDER/herbstluftwm/herbstcommander"
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/herbstluftwm"]="$DOTFOLDER/herbstluftwm"
 )
 
 execAfterInstall() {
