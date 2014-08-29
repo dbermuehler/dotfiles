@@ -1,4 +1,4 @@
-! include don't expand ~ or the $HOME variable
+! include do not expand ~ or the $HOME variable
 #include "../.Xresources.local"
 
 ! Xft Configs
