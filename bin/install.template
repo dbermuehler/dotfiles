@@ -1,9 +1,5 @@
 #!/bin/bash
 
-unset DOTFILES
-unset DOTFOLDER
-
-declare -A DOTFILES
 DOTFOLDER="$HOME/.dotfiles"
 
 DOTFILES=(
@@ -22,6 +18,7 @@ DOTFILES=(
 
 execAfterInstall() {
     :
-#    [ ! -d $HOME/.vim/bundle/ ] && mkdir $HOME/.vim/bundle/
-#    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+#    [ ! -d $HOME/.vim/bundle/ ] && mkdir $HOME/.vim/bundle/ &&
+#    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim &&
+#    vim +PluginInstall +qall
 }

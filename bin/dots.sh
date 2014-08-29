@@ -1,5 +1,10 @@
 #!/bin/bash
 
+unset DOTFILES
+unset DOTFOLDER
+
+declare -A DOTFILES
+
 printerr() {
     tput setaf 1
     echo "ERROR:$(tput sgr0) $@"
