@@ -10,13 +10,13 @@ printerr() {
     echo "ERROR:$(tput sgr0) $@"
 }
 
-overrideQuestion() {
-    unset OVERRIDE
+questionTime() {
+    unset ANSWER
 
-    read -e -n 1 -p "${@:-Override it? (y/n): }" OVERRIDE
-    while [[ ("$OVERRIDE" != "y") && ("$OVERRIDE" != "n") ]] ; do
+    read -e -n 1 -p "${@:-Override it? (y/n): }" ANSWER
+    while [[ ("$ANSWER" != "y") && ("$ANSWER" != "n") ]] ; do
         printerr "Not a correct option please chose again!"
-        read -e -n 1 -p "${@:-Override it? (y/n): }" OVERRIDE
+        read -e -n 1 -p "${@:-Override it? (y/n): }" ANSWER
     done
 }
 
@@ -28,28 +28,28 @@ fi
 . $1
 
 for link in "${!DOTFILES[@]}"; do
-    if [[ -e "${DOTFILES["$link"]}" ]] ; then
+    if [[ -e ${DOTFILES["$link"]} ]] ; then
         if [[ -L $link ]]; then
             if [[ ! ($link -ef ${DOTFILES["$link"]}) ]]; then
-                printerr "Symlink $link already exist and pointing at $(readlink $link)."
-                overrideQuestion
-                if [[ "$OVERRIDE" = "y" ]] ; then
+                printerr "Symlink $link already exist and pointing at $(readlink $link) and not at ${!DOTFILES[@]} like it should."
+                questionTime "Should $link link changed to ${!DOTFILES[@]} ? (y/n): "
+                if [[ "$ANSWER" = "y" ]] ; then
                     rm $link
                     ln -s ${DOTFILES["$link"]} $link
                 fi
             fi
         else
             if [[ -f $link ]]; then
-                 printerr "$link is not a symlink but a normal file."
-                 overrideQuestion "Override it with symlink to ${DOTFILES["$link"]} ? (y/n): "
-                if [[ "$OVERRIDE" = "y" ]] ; then
+                 printerr "The local dotfile $link already exist."
+                 questionTime "Delete local dotfile and add symlink to repo dotfile ${DOTFILES["$link"]} instead? (y/n): "
+                if [[ "$ANSWER" = "y" ]] ; then
                     rm -f $link
                     ln -s ${DOTFILES["$link"]} $link
                 fi
             elif [[ -d $link ]]; then
-                 printerr "$link is not a symlink but a directory."
-                 overrideQuestion "Override it with symlink to ${DOTFILES["$link"]} ? (y/n): "
-                if [[ "$OVERRIDE" = "y" ]] ; then
+                 printerr "The local dotfolder $link already exist."
+                 questionTime "Delete local dotfolder and add symlink to repo dotfolder ${DOTFILES["$link"]} instead? (y/n): "
+                if [[ "$ANSWER" = "y" ]] ; then
                     rm -rf $link
                     ln -s ${DOTFILES["$link"]} $link
                 fi
