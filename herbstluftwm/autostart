@@ -34,12 +34,12 @@ hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind $Mod-x spawn dmenu_run -i -p "Execute:"
-hc keybind $Mod-m spawn herbstcommander.sh
+hc keybind $Mod-m spawn ${XDG_CONFIG_HOME:-$HOME/.config/herbstluftwm/bin/}herbstcommander.sh
 hc keybind $Mod-Return spawn ${TERMINAL:-xterm}
 
 # layouting
 hc keybind $Mod-r remove
-hc keybind $Mod-space spawn ~/bin/layout_change.sh
+hc keybind $Mod-space spawn ${XDG_CONFIG_HOME:-$HOME/.config/herbstluftwm/bin/}layout_change.sh
 hc keybind $Mod-u split vertical 0.5
 hc keybind $Mod-o split horizontal 0.5
 hc keybind $Mod-s floating toggle
