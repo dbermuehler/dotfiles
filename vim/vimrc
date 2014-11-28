@@ -105,6 +105,8 @@ function! Run(...)
     elseif &filetype == "markdown"
         execute "silent! !firefox " . expand("%:r") . ".html >& /dev/null"
         execute "redraw!"
+    elseif &filetype == "prolog"
+        execute "!swipl " . args . " " . expand ("%")
     else
         echoerr "Error: Run() isn't defined for this filetype."
     endif

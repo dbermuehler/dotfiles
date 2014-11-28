@@ -23,10 +23,8 @@ map j <C-d>
 map k <C-u>
 map J <C-e>
 map K <C-y>
-map <A-h> gT
-map <A-l> gt
-map <A-S-h> :tabmove -1<CR>
-map <A-S-l> :tabmove +1<CR>
+map <C-S-p> :tabmove -1<CR>
+map <C-S-n> :tabmove +1<CR>
 map <C-x> :noscript toggletemp<CR>
 map <silent> <leader>h :set nohlsearch<CR>
 

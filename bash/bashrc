@@ -13,9 +13,9 @@ export EDITOR=vim
 #--------------------------------------------------#
 
 alias ls='ls --color=auto'
+alias grep='grep --color=auto' 
 alias mkdir='mkdir -p'
 alias cp='cp -r' 
-alias grep='grep --color' 
 alias psgrep='ps x | grep'
 alias vim='vim -p'
 alias gh='history | grep'
