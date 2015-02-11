@@ -3,7 +3,6 @@ call plug#begin('~/.vim/plugged')
 
 " load Plugins
 Plug 'Raimondi/delimitMate'
-Plug 'TaskList.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
@@ -16,7 +15,7 @@ Plug 'Matt-Deacalion/vim-systemd-syntax'
 Plug 'ivalkeen/vim-simpledb'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/vim-peekaboo'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'ntpeters/vim-better-whitespace'
 
 if v:version >= 704
     Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
@@ -28,20 +27,18 @@ Plug 'w0ng/vim-hybrid'
 call plug#end()
 
 " Plugin settings
-let g:UltiSnipsEditSplit="horizontal"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit = "horizontal"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-let g:tlWindowPosition = 1 " tasklist will show up at the bottom of the screen
+let g:syntastic_check_on_wq = 0
 
 " let g:NERDTreeWinSize = 25
 " let g:NERDTreeWinPos = 'right'
 " let g:NERDTreeMinimalUI = 1
 " let g:NERDTreeHighlightCursorline = 1
 
-let g:hardtime_default_on = 0
-let g:hardtime_maxcount = 2
-let g:hardtime_timeout = 2000
+let g:peekaboo_delay = 750
 
 let g:neocomplete#enable_at_startup = 0
 let g:neocomplete#enable_smart_case = 1
@@ -49,7 +46,6 @@ let g:neocomplete#enable_smart_case = 1
 let g:tagbar_left = 1
 let g:tagbar_width = 25
 let g:tagbar_zoomwidth = 50
-let g:tagbar_autoclose = 1
 let g:tagbar_type_bib = {
     \ 'ctagstype' : 'bibtex',
     \ 'kinds'     : [
@@ -65,8 +61,6 @@ autocmd FileType sql set commentstring=--\ %s
 
 " Custome key mappings
 map <F2> :Tagbar<CR>
-map <F3> :TaskListToggle<CR>
-map <F4> :NERDTreeToggle<CR>
 
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 1)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 1)<CR>
