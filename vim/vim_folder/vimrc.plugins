@@ -1,36 +1,31 @@
-" Vundle Settings
-filetype off " Only temporary. Turned off because plugin loading is faster without it.
-set runtimepath+=~/.vim/bundle/vundle/
-call vundle#begin()
+" Plug Settings
+call plug#begin('~/.vim/plugged')
 
 " load Plugins
-Plugin 'gmarik/vundle'
-Plugin 'Raimondi/delimitMate'
-Plugin 'scrooloose/nerdtree'
-Plugin 'TaskList.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-commentary'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'tmhedberg/matchit'
-Plugin 'terryma/vim-smooth-scroll'
-Plugin 'inside/vim-search-pulse'
-Plugin 'Matt-Deacalion/vim-systemd-syntax'
-Plugin 'ivalkeen/vim-simpledb'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'junegunn/vim-peekaboo'
-Plugin 'bronson/vim-trailing-whitespace'
+Plug 'Raimondi/delimitMate'
+Plug 'TaskList.vim'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-commentary'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'tmhedberg/matchit'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'inside/vim-search-pulse'
+Plug 'Matt-Deacalion/vim-systemd-syntax'
+Plug 'ivalkeen/vim-simpledb'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/vim-peekaboo'
+Plug 'bronson/vim-trailing-whitespace'
 
 if v:version >= 704
-    Plugin 'Shougo/neocomplete.vim'
+    Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
 endif
 
 " Colorschemes
-Plugin 'w0ng/vim-hybrid'
+Plug 'w0ng/vim-hybrid'
 
-call vundle#end()
-filetype on
+call plug#end()
 
 " Plugin settings
 let g:UltiSnipsEditSplit="horizontal"
@@ -39,10 +34,10 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 let g:tlWindowPosition = 1 " tasklist will show up at the bottom of the screen
 
-let g:NERDTreeWinSize = 25
-let g:NERDTreeWinPos = 'right'
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeHighlightCursorline = 1
+" let g:NERDTreeWinSize = 25
+" let g:NERDTreeWinPos = 'right'
+" let g:NERDTreeMinimalUI = 1
+" let g:NERDTreeHighlightCursorline = 1
 
 let g:hardtime_default_on = 0
 let g:hardtime_maxcount = 2
