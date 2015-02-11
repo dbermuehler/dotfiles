@@ -14,11 +14,13 @@ Plugin 'tpope/vim-commentary'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'tmhedberg/matchit'
-Plugin 'osyo-manga/vim-over'
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'inside/vim-search-pulse'
-Plugin 'takac/vim-hardtime'
 Plugin 'Matt-Deacalion/vim-systemd-syntax'
+Plugin 'ivalkeen/vim-simpledb'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'junegunn/vim-peekaboo'
+Plugin 'bronson/vim-trailing-whitespace'
 
 if v:version >= 704
     Plugin 'Shougo/neocomplete.vim'
@@ -62,6 +64,9 @@ let g:tagbar_type_bib = {
     \ ],
     \ 'sort'    : 0,
 \ }
+
+let g:simpledb_show_timing = 0
+autocmd FileType sql set commentstring=--\ %s
 
 " Custome key mappings
 map <F2> :Tagbar<CR>

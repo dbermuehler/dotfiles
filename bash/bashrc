@@ -66,9 +66,11 @@ sp(){
         [[ "$PWD" = "/tmp/scratchpad" ]] && cd
         rm -r /tmp/scratchpad
         return 0
+    else
+        [[ ! -d /tmp/scratchpad ]] && mkdir /tmp/scratchpad
+        cp "$1" /tmp/scratchpad
+        cd /tmp/scratchpad
     fi
-    [[ ! -d /tmp/scratchpad ]] && mkdir /tmp/scratchpad
-    cd /tmp/scratchpad
 }
 
 #--------------------------------------------------#

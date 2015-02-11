@@ -14,7 +14,7 @@ endif
 if filereadable('makefile')
   setlocal makeprg=make
 else
-  CompilerSet makeprg=make\ -f\ ~/Alles_Moegliche/LaTex/makefile\ %<.pdf
+  CompilerSet makeprg=make\ -f\ ~/Alles_Moegliche/LaTex/makefile
 endif
 
 CompilerSet errorformat=%f:%l:\ %m,%f:%l-%\\d%\\+:\ %m

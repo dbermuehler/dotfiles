@@ -1,6 +1,6 @@
 " Settings
 set nocompatible " required for Vundle and it is nevertheless a good idea to set
-set noswapfile 
+set noswapfile
 set backspace=indent,eol,start " allow backspacing over autoindent, line breaks and the beginning of insert mode
 set history=50
 set fileformats=unix,dos
@@ -59,6 +59,7 @@ syntax on
 filetype plugin on " apply settings based on filetype
 filetype indent on " indention for known file extensions
 set omnifunc=syntaxcomplete#Complete
+let g:tex_flavor = 'latex'
 
 " spell checking
 set thesaurus+=~/.vim/openthesaurus.txt
@@ -82,6 +83,7 @@ map <silent> <leader>s :setlocal invspell<CR>
 map <silent> <leader>r :source ~/.vimrc<CR>
 map <leader>p :set invpaste paste?<CR>
 
+map ° :Ag <c-r>=expand("<cword>")<cr><cr>
 " on the qwertz keyboard ctrl-y is a harder to reach then on a qwerty keyboard
 noremap <silent> <C-z> <C-y>
 
