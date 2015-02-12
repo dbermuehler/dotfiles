@@ -1,5 +1,5 @@
 " Settings
-set nocompatible " required for Vundle and it is nevertheless a good idea to set
+set nocompatible
 set noswapfile
 set backspace=indent,eol,start " allow backspacing over autoindent, line breaks and the beginning of insert mode
 set history=50
