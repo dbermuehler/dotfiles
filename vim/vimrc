@@ -143,3 +143,15 @@ let $LOCALFILE=expand("~/.vimrc.local")
 if filereadable($LOCALFILE)
     source $LOCALFILE
 endif
+
+let $PLUGINFILE=expand("~/.vim/vimrc.plugins")
+if filereadable($PLUGINFILE)
+    source $PLUGINFILE
+endif
+
+try
+    colorscheme hybrid
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme default
+endtry
+

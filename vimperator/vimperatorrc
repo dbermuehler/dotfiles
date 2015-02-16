@@ -1,19 +1,18 @@
 " Settings
 set hintchars=hjklasdf
-set gui=tabs
+set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 set tabnumbers=true
-"Follow the selected hint on <Return>
+" Follow the selected hint on <Return>
 set followhints=1
 set scroll=3
 set hlsearch
 set animations=true
 set status="input,location,bookmark,ssl"
 set editor='urxvt -e vim'
-"order of completion list: t = tabs, l = location bar entries, s = search engine suggestions
+" order of completion list: t = tabs, l = location bar entries, s = search engine suggestions
 set complete=tsl
-"don't focus automatically the first textbox
-set focuscontent=true 
-set toolbars=noaddons,nobookmarks,nomenu,nonavigation,tabs
+" don't focus automatically the first textbox
+set focuscontent=true
 
 " Commands
 command private -description "Opens Private Window" winopen -private about:newtab
