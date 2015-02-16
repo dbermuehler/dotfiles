@@ -139,19 +139,84 @@ endfunction
 
 command! InvertBrackets call InvertBrackets()
 
-let $LOCALFILE=expand("~/.vimrc.local")
-if filereadable($LOCALFILE)
-    source $LOCALFILE
+" Plug Settings
+call plug#begin('~/.vim/plugged')
+
+" load Plugins
+Plug 'Raimondi/delimitMate'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-commentary'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'tmhedberg/matchit'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'inside/vim-search-pulse'
+Plug 'Matt-Deacalion/vim-systemd-syntax'
+Plug 'ivalkeen/vim-simpledb'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/vim-peekaboo'
+Plug 'ntpeters/vim-better-whitespace'
+
+if v:version >= 704
+    Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
 endif
 
-let $PLUGINFILE=expand("~/.vim/vimrc.plugins")
-if filereadable($PLUGINFILE)
-    source $PLUGINFILE
-endif
+" Colorschemes
+Plug 'w0ng/vim-hybrid'
+
+call plug#end()
+
+" Plugin settings
+let g:UltiSnipsEditSplit = "horizontal"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+let g:syntastic_check_on_wq = 0
+
+" let g:NERDTreeWinSize = 25
+" let g:NERDTreeWinPos = 'right'
+" let g:NERDTreeMinimalUI = 1
+" let g:NERDTreeHighlightCursorline = 1
+
+let g:peekaboo_delay = 750
+
+let g:neocomplete#enable_at_startup = 0
+let g:neocomplete#enable_smart_case = 1
+
+let g:tagbar_left = 1
+let g:tagbar_width = 25
+let g:tagbar_zoomwidth = 50
+let g:tagbar_type_bib = {
+    \ 'ctagstype' : 'bibtex',
+    \ 'kinds'     : [
+        \ 'e:entries',
+        \ 'a:authors',
+        \ 't:titles',
+    \ ],
+    \ 'sort'    : 0,
+\ }
+
+let g:simpledb_show_timing = 0
+autocmd FileType sql set commentstring=--\ %s
+
+" Custome key mappings
+map <F2> :Tagbar<CR>
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 1)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 1)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 3)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 3)<CR>
 
 try
     colorscheme hybrid
 catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme default
 endtry
+
+let $LOCALFILE=expand("~/.vimrc.local")
+if filereadable($LOCALFILE)
+    source $LOCALFILE
+endif
+
 
