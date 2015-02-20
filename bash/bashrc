@@ -81,8 +81,10 @@ shopt -s globstar # ** will match all files and zero or more directories and sub
 shopt -s cdspell # will check and correct minor spelling mistakes in directory names
 shopt -s checkwinsize # window size is checked after each command, if needed it will udpate LINES and COLUMNES
 
-# deactivate flow control
-stty -ixon
+# deactivate flow control if stdin is a terminal
+if [ -t 0 ]; then
+    stty -ixon
+fi
 
 #--------------------------------------------------#
 #              Import local settings               #
