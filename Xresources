@@ -9,6 +9,7 @@ Xft.hinting: true
 xterm*background: #1d1f21
 xterm*foreground: #ffffff
 
+! Terminal Colorscheme "Belge" from http://www.xcolors.net/
 !black
 *color0:     #252525
 *color8:     #454545

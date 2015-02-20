@@ -1,7 +1,7 @@
 set completion-ignore-case on
 set match-hidden-files off
 set mark-symlinked-directories on
-# if there are more than one completion match they will be listed immediately
+# if there are more than one completion match they will be listed immediately (no need to double <TAB>)
 set show-all-if-ambiguous on
 # if completion is performed in the middle of line do not insert the already existing part of the line
 set skip-completed-text on

@@ -105,8 +105,7 @@ function! Run(...)
         execute "silent! !firefox " . expand("%") . " >& /dev/null"
         execute "redraw!"
     elseif &filetype == "markdown"
-        execute "silent! !firefox " . expand("%:r") . ".html >& /dev/null"
-        execute "redraw!"
+        execute "silent !zathura --fork " . args . " " . expand("%:r") . ".pdf >& /dev/null"
     elseif &filetype == "prolog"
         execute "!swipl " . args . " " . expand ("%")
     else
@@ -197,8 +196,28 @@ let g:tagbar_type_bib = {
     \ 'sort'    : 0,
 \ }
 
+if filereadable("/usr/bin/markdown2ctags")
+    let g:tagbar_type_markdown = {
+        \ 'ctagstype': 'markdown',
+        \ 'ctagsbin' : '/usr/bin/markdown2ctags',
+        \ 'ctagsargs' : '-f - --sort=yes',
+        \ 'kinds' : [
+            \ 's:sections',
+            \ 'i:images'
+        \ ],
+        \ 'sro' : '|',
+        \ 'kind2scope' : {
+            \ 's' : 'section',
+        \ },
+        \ 'sort': 0,
+    \ }
+endif
+
+
 let g:simpledb_show_timing = 0
+
 autocmd FileType sql set commentstring=--\ %s
+autocmd FileType xdefaults set commentstring=\!\ %s
 
 " Custome key mappings
 map <F2> :Tagbar<CR>
@@ -214,9 +233,6 @@ catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme default
 endtry
 
-let $LOCALFILE=expand("~/.vimrc.local")
-if filereadable($LOCALFILE)
-    source $LOCALFILE
+if filereadable("~/.vimrc.local")
+    source "~/.vimrc.local"
 endif
-
-

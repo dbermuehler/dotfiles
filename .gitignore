@@ -1,5 +1,7 @@
 vimperator/vimperator_folder/info
 vim/vim_folder/plugged/
+vim/vim_folder/autoload/plug.vim
+vim/vim_folder/autoload/plug.vim.old
 bin/install
 herbstluftwm/autostart.local
 vim/vim_folder/.netrwhist

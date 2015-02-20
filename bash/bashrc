@@ -2,7 +2,7 @@
 #                     Variables                    #
 #--------------------------------------------------#
 
-export PATH="~/bin:${XDG_CONFIG_HOME:-$HOME/.config}/herbstluftwm/bin:$PATH"
+export PATH="~/bin:$PATH"
 export PS1='[\w] \$ '
 export PROMPT_DIRTRIM=3
 export BROWSER=firefox
@@ -27,7 +27,7 @@ alias gh='history | grep'
 export HISTCONTROL="ignorespace:ignoredups" # ignores duplicates and commands with space at the beginning
 export HISTIGNORE='clear:history' # ignores the commands clear and history
 export HISTSIZE="100000"
-export PROMPT_COMMAND='history -a'
+export PROMPT_COMMAND='history -a' # add history entry to history file after each command and not after exiting the shell
 shopt -s histappend # append history to history file and don't override it
 shopt -s histreedit # allows to re-edit a failed history substitution
 shopt -s histverify # history substitution isn't executed immediately

@@ -1,3 +1,3 @@
-setlocal makeprg=mkd2html\ -header\ \"\<meta\ charset\=\'utf-8\'\>\"\ %\ %<.html
+setlocal makeprg=pandoc\ %\ -V\ fontfamily='fourier'\ -o\ %<.pdf
 setlocal textwidth=120
 setlocal colorcolumn=+1
