@@ -18,7 +18,7 @@ alias mkdir='mkdir -p'
 alias cp='cp -r'
 alias psgrep='ps x | grep'
 alias vim='vim -p'
-alias gh='history | grep'
+alias hg='history | grep' # may conflict with Mercurial, but since I'm not using it this will be no problem
 
 #--------------------------------------------------#
 #                 History Settings                 #

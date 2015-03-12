@@ -7,37 +7,33 @@ set fileformats=unix,dos
 set mouse=a " enables mouse support in all modes
 set clipboard=unnamed " access X clipboard via the * and + register
 set hidden " Allow switching edited buffers without saving
-set scrolloff=3 " shows the next or previous 3 lines under or above the cursor
-"set listchars=tab:>-,trail:.,eol:$ " characters for tab, trailing spaces and eol when activate 'set list'
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " characters for tab, trailing spaces and eol when activate 'set list'
 set undofile " activates persistent undo
 set undodir=~/.vimundo/ " if undofile is activated, a directory is needed where the undofiles are stored
 set tags=./tags;
 set completeopt=menu,preview,longest
-set wildignorecase " completion on files in command mode is now case insensitive
 set autoread " if a file outside of the current vim session is modified it can be read in by :checktime, see :help E321
 set modelines=0 " don't need modelines and the potential security hazard
-set scroll=10
-set showmode
 set path=$PWD/**
 set shell=/bin/bash
-set visualbell
-set t_Co=256 " activate 256 color support if your terminal supports it and haven't configured to use it
 
 " vim gui stuff
-set cursorline " highlight current cursor line
-"set cursorcolumn " highlight current cursor column
 set showmatch " show matching brackets/parenthesis
 set number
 set ruler " shows line numbers
 set showcmd " show entered command in normal mode
+set showmode
 set ttyfast " send more characters for redraws
+set scrolloff=3 " shows the next or previous 3 lines under or above the cursor
+set scroll=10
+set visualbell
+set t_Co=256 " activate 256 color support if your terminal supports it and haven't configured to use it
+"set listchars=tab:>-,trail:.,eol:$ " characters for tab, trailing spaces and eol when activate 'set list'
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " characters for tab, eol, etc. when activate 'set list'
 
 set wildmenu
 set wildmode=longest:full,full " first tab complete only longest common string, second tab complete to first element in list
-
+set wildignorecase " completion on files in command mode is now case insensitive
 set wildignore+=*.aux,*.out,*.toc " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg " binary images
 set wildignore+=*.class " java class files
 
 " searching
@@ -59,7 +55,20 @@ syntax on
 filetype plugin on " apply settings based on filetype
 filetype indent on " indention for known file extensions
 set omnifunc=syntaxcomplete#Complete
-let g:tex_flavor = 'latex'
+
+let g:tex_flavor = 'latex' " set the filetype for tex files to latex for correct syntax highlighting etc.
+let g:markdown_fenced_languages = ['xml', 'html', 'sql', 'python', 'java', 'tex', 'sh'] " enables syntax highlighting for these languages in markdown code blocks
+
+augroup filetype_settings
+    autocmd FileType sql setlocal commentstring=--\ %s
+    autocmd FileType xdefaults setlocal commentstring=\!\ %s
+
+    " Set correct filetype for external editing of the commandline content when invoking 'v' in bashs vi mode
+    autocmd BufRead,BufNewFile bash-fc-* setlocal filetype=sh
+
+    " only activate cursorline for files with less then 500 lines to prevent laging
+    autocmd BufRead,BufNewFile * if line('$') < 500 | setlocal cursorline | endif
+augroup END
 
 " spell checking
 set thesaurus+=~/.vim/openthesaurus.txt
@@ -70,6 +79,7 @@ noremap <C-j> :bnext<CR>
 noremap <C-k> :bprevious<CR>
 noremap <C-h> :tabprevious<CR>
 noremap <C-l> :tabNext<CR>
+nnoremap <leader>b :ls<CR>:b<Space>
 
 " use the arrow key to move between windows
 nnoremap <Left> <C-w>h
@@ -79,7 +89,7 @@ nnoremap <Right> <C-w>l
 
 " clears the last search pattern to disable highlighting
 map <silent> <leader>h :let @/ = ""<CR>
-map <silent> <leader>s :setlocal invspell<CR>
+map <silent> <leader>s :setlocal invspell spell?<CR>
 map <silent> <leader>r :source ~/.vimrc<CR>
 map <leader>p :set invpaste paste?<CR>
 
@@ -115,29 +125,6 @@ endfunction
 
 command! -nargs=* Run call Run(<f-args>)
 
-function! InvertBrackets()
-    let bracket = getline(".")[col(".")-1]
-    if bracket == "("
-        execute "normal!r)"
-    elseif bracket == ")"
-        execute "normal!r("
-    elseif bracket == "}"
-        execute "normal!r{"
-    elseif bracket == "{"
-        execute "normal!r}"
-    elseif bracket == "["
-        execute "normal!r]"
-    elseif bracket == "]"
-        execute "normal!r["
-    elseif bracket == "<"
-        execute "normal!r>"
-    elseif bracket == ">"
-        execute "normal!r<"
-    endif
-endfunction
-
-command! InvertBrackets call InvertBrackets()
-
 " Plug Settings
 call plug#begin('~/.vim/plugged')
 
@@ -170,6 +157,7 @@ call plug#end()
 let g:UltiSnipsEditSplit = "horizontal"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "$HOME/.vim/plugged/vim-snippets/UltiSnips"]
 
 let g:syntastic_check_on_wq = 0
 
@@ -182,6 +170,8 @@ let g:peekaboo_delay = 750
 
 let g:neocomplete#enable_at_startup = 0
 let g:neocomplete#enable_smart_case = 1
+
+let g:simpledb_show_timing = 0
 
 let g:tagbar_left = 1
 let g:tagbar_width = 25
@@ -212,12 +202,6 @@ if filereadable("/usr/bin/markdown2ctags")
         \ 'sort': 0,
     \ }
 endif
-
-
-let g:simpledb_show_timing = 0
-
-autocmd FileType sql set commentstring=--\ %s
-autocmd FileType xdefaults set commentstring=\!\ %s
 
 " Custome key mappings
 map <F2> :Tagbar<CR>

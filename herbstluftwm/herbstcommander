@@ -1,1 +1,1 @@
-dmenu_cmd="dmenu -i"
+dmenu_command=(dmenu -i -h 23)

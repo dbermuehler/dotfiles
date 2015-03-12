@@ -33,7 +33,7 @@ Mod=Mod4
 hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
-hc keybind $Mod-x spawn dmenu_run -i -p "Execute:"
+hc keybind Mod4-x spawn dmenu_run -i -h 23
 hc keybind $Mod-m spawn ${XDG_CONFIG_HOME:-$HOME/.config/herbstluftwm/bin}/herbstcommander.sh
 hc keybind $Mod-Return spawn ${TERMINAL:-xterm}
 
