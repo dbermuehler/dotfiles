@@ -93,7 +93,6 @@ map <silent> <leader>s :setlocal invspell spell?<CR>
 map <silent> <leader>r :source ~/.vimrc<CR>
 map <leader>p :set invpaste paste?<CR>
 
-map ° :Ag <c-r>=expand("<cword>")<cr><cr>
 " on the qwertz keyboard ctrl-y is a harder to reach then on a qwerty keyboard
 noremap <silent> <C-z> <C-y>
 
@@ -133,6 +132,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tmhedberg/matchit'
@@ -205,6 +205,7 @@ endif
 
 " Custome key mappings
 map <F2> :Tagbar<CR>
+map ° :Ag <c-r>=expand("<cword>")<cr><cr>
 
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 1)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 1)<CR>

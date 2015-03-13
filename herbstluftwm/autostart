@@ -24,6 +24,7 @@ hc set window_border_width 3
 hc set window_border_normal_color black
 hc set window_border_active_color 'grey'
 hc set auto_detect_monitors 1
+hc set swap_monitors_to_get_tag 0
 
 # remove all existing keybindings
 hc keyunbind --all
@@ -72,21 +73,20 @@ hc keybind $Mod-Shift-k shift up
 hc keybind $Mod-Shift-l shift right
 
 # cycle through tags
-hc keybind $Mod-period use_index +1
-hc keybind $Mod-comma use_index -1
+hc keybind $Mod-period use_index +1 --skip-visible
+hc keybind $Mod-comma use_index -1 --skip-visible
 
-# tags
-TAG_NAMES=( {1..2} )
-TAG_KEYS=( {1..2} 0 )
+# move focused window through tags
+hc keybind $Mod-Shift-period move_index +1
+hc keybind $Mod-Shift-comma move_index -1
 
-hc rename default "${TAG_NAMES[0]}" || true
-for i in ${!TAG_NAMES[@]} ; do
-    hc add "${TAG_NAMES[$i]}"
-    key="${TAG_KEYS[$i]}"
-    if ! [ -z "$key" ] ; then
-        hc keybind "$Mod-$key" use "${TAG_NAMES[$i]}"
-        hc keybind "$Mod-Shift-$key" move "${TAG_NAMES[$i]}"
-    fi
+hc keybind $Mod-Shift-m spawn ${XDG_CONFIG_HOME:-$HOME/.config/herbstluftwm/bin/}merge_tag.sh
+hc rename default 1
+hc add 2
+
+for key in $(seq 0 8); do
+    hc keybind "$Mod-$((key+1))" use_index "$key"
+    hc keybind "$Mod-Shift-$((key+1))" move_index "$key"
 done
 
 # rules
