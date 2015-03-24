@@ -25,3 +25,6 @@ set colored-stats on
 set show-mode-in-prompt on
 # wait 100 ms after the escape key has been pressed
 set keyseq-timeout 100
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward

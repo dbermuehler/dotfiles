@@ -16,9 +16,9 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias mkdir='mkdir -p'
 alias cp='cp -r'
-alias psgrep='ps x | grep'
 alias vim='vim -p'
 alias hg='history | grep' # may conflict with Mercurial, but since I'm not using it this will be no problem
+alias pps='ps -o "pid tty cmd" -fx'
 
 #--------------------------------------------------#
 #                 History Settings                 #
@@ -40,6 +40,9 @@ shopt -s cmdhist # save all lines of a multiple-line command in the same history
 if [ -f /etc/bash_completion ]; then
    . /etc/bash_completion.d/*
 fi
+
+complete -cf spawn
+complete -f rename
 
 #--------------------------------------------------#
 #                    Functions                     #
@@ -70,6 +73,63 @@ sp(){
         cp "$1" /tmp/scratchpad
         cd /tmp/scratchpad
     fi
+}
+
+psgrep() {
+    ps -o "pid user:10 tty cmd" -ax | grep "$@" | grep -v grep
+}
+
+spawn() {
+    ($@ &) ; exit
+}
+
+rename() {
+    # change the internal field seperator, so that we can handle filenames with spaces correctly
+    saveIFS="$IFS"
+    IFS=$(echo -en "\n\b")
+
+    unset verbose regex file files
+
+    # only print out the old and new file but don't rename the file
+    if [ "$1" = "-v" ]; then
+        verbose=1
+        shift
+    fi
+
+    if [ $# -lt 2 ]; then
+        echo "Usage: rename [-v] sedexpr filenames"
+        echo "Example: rename 's/lecture([0-9])\.pdf/Lecture_0\1.pdf/' lecture*"
+        return
+    fi
+
+    regex="'$1'"
+    shift
+    files=($@)
+
+    # check if the files to rename exist
+    if ! ls "$@" >& /dev/null; then
+        echo "Couldn't rename files: files or directory not found"
+        return
+    fi
+
+    for file in "${files[@]}"; do
+        if ! new_file="$(eval "echo $file | sed -r $regex")"; then
+            echo "ERROR: Didn't rename $file due to an error in the regex"
+            continue
+        fi
+
+        # no change in filename -> no need to rename
+        [ "$file" = "$new_file" ] && continue
+
+        if [ "$verbose" ]; then
+            echo "$file -> $new_file"
+        else
+            mv "$file" "$new_file"
+        fi
+    done
+
+    IFS="$saveIFS"
+    unset verbose regex file files saveIFS
 }
 
 #--------------------------------------------------#

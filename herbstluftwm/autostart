@@ -81,6 +81,7 @@ hc keybind $Mod-Shift-period move_index +1
 hc keybind $Mod-Shift-comma move_index -1
 
 hc keybind $Mod-Shift-m spawn ${XDG_CONFIG_HOME:-$HOME/.config/herbstluftwm/bin/}merge_tag.sh
+
 hc rename default 1
 hc add 2
 
