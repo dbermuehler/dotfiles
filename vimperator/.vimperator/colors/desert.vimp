@@ -1,0 +1,34 @@
+" ==Vimperator_Color_Scheme==
+" name: Desert
+" ==Desert_Color_Scheme==
+
+hi Normal    background: #242721; color: #afafaf;
+hi CmdLine   background: #242721; color: #afafaf;
+
+hi CompGroup          background: #242721; color: #afafaf;
+hi CompTitle          background: #242721; color: #ffffff;
+hi CompTitle>*        border-top: 1px solid gray; border-bottom: 1px solid #BBB; padding: 1px 0.5ex;
+hi CompItem           background: #242721; color: #afafaf;
+hi CompItem[selected] background: #444741; color: #afafaf;
+hi CompDesc           background: #242721; color: #afafaf;
+hi CompDesc[selected] background: #444741; color: #afafaf;
+hi CompMsg            background: #242721; color: #afafaf;
+
+hi ErrorMsg           background: #242721; color: red;
+hi WarningMsg         color: red; background: #242721;
+hi Filter             color: black; border-radius: 2px; background: #ffec8b; border: 1px solid orange;
+
+hi StatusLine         background: #242721; color: #afafaf;
+
+hi Hint               font-family: monospace; font-size: 10pt; font-weight: normal; color: #fff; background-color: #666; padding: 0px 1px; border: 1px solid #242721;
+
+hi Title              font-size: 10pt; color: #242721; background: #afafaf;
+
+hi InfoMsg background: #242721; color: #afafaf; -moz-transition: all 0.25s;
+
+hi Indicator color: white;
+hi CompResult width: 750px; max-width: 750px; overflow: hidden;
+
+" style -name statusbar chrome://* <<EOM
+" status-bar statusbarpanel { padding: 0 1px !important; }
+" statusbarpanel > * { margin: 0 !important; padding: 0 2px 0 0 !important; }
