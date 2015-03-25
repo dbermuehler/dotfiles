@@ -3,3 +3,4 @@ vim/.vim/plugged/
 vim/.vim/autoload/plug.vim
 vim/.vim/autoload/plug.vim.old
 vim/.vim/.netrwhist
+herbstluftwm/.config/herbstluftwm/autostart.local
