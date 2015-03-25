@@ -1,7 +1,9 @@
 Installation
 ============
 
-For installation use the dots.sh script. It needs an installation file as an argument.
-A template for an installation file can be found in bin/install.template. There you can specify in an associative array,
-named DOTFILES, which files/directories from the repo you want to be installed. You also have to specify the path to the
-dotfile directory here with the variable DOTFOLDER.
+For installation use [GNU Stow](https://www.gnu.org/software/stow/). It's excellent for managing symlinks from the
+dotfile folder to the real location of the dotfiles.
+
+For a tutorial how to use Stow have a look at this [blog entry](http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html) from Brandon Invergo.
+
+Or have a look at this [video](https://www.youtube.com/watch?v=zhdO46oqeRw).
