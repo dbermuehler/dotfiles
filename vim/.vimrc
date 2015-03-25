@@ -122,87 +122,89 @@ endfunction
 
 command! -nargs=* Run call Run(<f-args>)
 
-" Plug Settings
-call plug#begin('~/.vim/plugged')
+if filereadable("~/.vim/autoload/plug.vim")
+    " Plug Settings
+    call plug#begin('~/.vim/plugged')
 
-" load Plugins
-Plug 'Raimondi/delimitMate'
-Plug 'majutsushi/tagbar'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'tmhedberg/matchit'
-Plug 'inside/vim-search-pulse'
-Plug 'Matt-Deacalion/vim-systemd-syntax'
-Plug 'ivalkeen/vim-simpledb'
-Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/vim-peekaboo'
-Plug 'ntpeters/vim-better-whitespace'
+    " load Plugins
+    Plug 'Raimondi/delimitMate'
+    Plug 'majutsushi/tagbar'
+    Plug 'scrooloose/syntastic'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    Plug 'tmhedberg/matchit'
+    Plug 'inside/vim-search-pulse'
+    Plug 'Matt-Deacalion/vim-systemd-syntax'
+    Plug 'ivalkeen/vim-simpledb'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'junegunn/vim-peekaboo'
+    Plug 'ntpeters/vim-better-whitespace'
 
-if v:version >= 704
-    Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
-endif
+    if v:version >= 704
+        Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
+    endif
 
-" Colorschemes
-Plug 'w0ng/vim-hybrid'
+    " Colorschemes
+    Plug 'w0ng/vim-hybrid'
 
-call plug#end()
+    call plug#end()
 
-" Plugin settings
-let g:UltiSnipsEditSplit = "horizontal"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "$HOME/.vim/plugged/vim-snippets/UltiSnips"]
+    " Plugin settings
+    let g:UltiSnipsEditSplit = "horizontal"
+    let g:UltiSnipsJumpForwardTrigger = "<tab>"
+    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+    let g:UltiSnipsSnippetDirectories=["UltiSnips", "$HOME/.vim/plugged/vim-snippets/UltiSnips"]
 
-let g:syntastic_check_on_wq = 0
+    let g:syntastic_check_on_wq = 0
 
-" let g:NERDTreeWinSize = 25
-" let g:NERDTreeWinPos = 'right'
-" let g:NERDTreeMinimalUI = 1
-" let g:NERDTreeHighlightCursorline = 1
+    " let g:NERDTreeWinSize = 25
+    " let g:NERDTreeWinPos = 'right'
+    " let g:NERDTreeMinimalUI = 1
+    " let g:NERDTreeHighlightCursorline = 1
 
-let g:peekaboo_delay = 750
+    let g:peekaboo_delay = 750
 
-let g:neocomplete#enable_at_startup = 0
-let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#enable_at_startup = 0
+    let g:neocomplete#enable_smart_case = 1
 
-let g:simpledb_show_timing = 0
+    let g:simpledb_show_timing = 0
 
-let g:tagbar_left = 1
-let g:tagbar_width = 25
-let g:tagbar_zoomwidth = 50
-let g:tagbar_type_bib = {
-    \ 'ctagstype' : 'bibtex',
-    \ 'kinds'     : [
-        \ 'e:entries',
-        \ 'a:authors',
-        \ 't:titles',
-    \ ],
-    \ 'sort'    : 0,
-\ }
-
-if filereadable("/usr/bin/markdown2ctags")
-    let g:tagbar_type_markdown = {
-        \ 'ctagstype': 'markdown',
-        \ 'ctagsbin' : '/usr/bin/markdown2ctags',
-        \ 'ctagsargs' : '-f - --sort=yes',
-        \ 'kinds' : [
-            \ 's:sections',
-            \ 'i:images'
+    let g:tagbar_left = 1
+    let g:tagbar_width = 25
+    let g:tagbar_zoomwidth = 50
+    let g:tagbar_type_bib = {
+        \ 'ctagstype' : 'bibtex',
+        \ 'kinds'     : [
+            \ 'e:entries',
+            \ 'a:authors',
+            \ 't:titles',
         \ ],
-        \ 'sro' : '|',
-        \ 'kind2scope' : {
-            \ 's' : 'section',
-        \ },
-        \ 'sort': 0,
+        \ 'sort'    : 0,
     \ }
-endif
 
-" Custome key mappings
-map <F2> :Tagbar<CR>
-map ° :Ag <c-r>=expand("<cword>")<cr><cr>
+    if filereadable("/usr/bin/markdown2ctags")
+        let g:tagbar_type_markdown = {
+            \ 'ctagstype': 'markdown',
+            \ 'ctagsbin' : '/usr/bin/markdown2ctags',
+            \ 'ctagsargs' : '-f - --sort=yes',
+            \ 'kinds' : [
+                \ 's:sections',
+                \ 'i:images'
+            \ ],
+            \ 'sro' : '|',
+            \ 'kind2scope' : {
+                \ 's' : 'section',
+            \ },
+            \ 'sort': 0,
+        \ }
+    endif
+
+    " Custome key mappings
+    map <F2> :Tagbar<CR>
+    map ° :Ag <c-r>=expand("<cword>")<cr><cr>
+endif
 
 try
     colorscheme hybrid
