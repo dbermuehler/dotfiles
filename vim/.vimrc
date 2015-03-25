@@ -122,7 +122,7 @@ endfunction
 
 command! -nargs=* Run call Run(<f-args>)
 
-if filereadable("~/.vim/autoload/plug.vim")
+if filereadable($HOME."/.vim/autoload/plug.vim")
     " Plug Settings
     call plug#begin('~/.vim/plugged')
 
@@ -212,6 +212,6 @@ catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme default
 endtry
 
-if filereadable("~/.vimrc.local")
+if filereadable($HOME."/.vimrc.local")
     source "~/.vimrc.local"
 endif
