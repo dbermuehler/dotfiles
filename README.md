@@ -11,7 +11,7 @@ Or have a look at this [video](https://www.youtube.com/watch?v=zhdO46oqeRw).
 vim Plugins
 -----------
 
-The vim plugins I'm using aren't shiped with my dotfiles. You first have to install the vim plugin manager
+The vim plugins I'm using aren't shipped with my dotfiles. You first have to install the vim plugin manager
 [Plug](https://github.com/junegunn/vim-plug) which I'm using. Then you can install the plugins via
 ```viml
 :PlugInstall
