@@ -141,6 +141,9 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
     Plug 'airblade/vim-gitgutter'
     Plug 'junegunn/vim-peekaboo'
     Plug 'ntpeters/vim-better-whitespace'
+    Plug 'chikamichi/mediawiki.vim'
+    Plug 'gastonsimone/vim-dokumentary'
+    Plug 'EinfachToll/DidYouMean'
 
     if v:version >= 704
         Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
@@ -213,5 +216,5 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
 if filereadable($HOME."/.vimrc.local")
-    source "~/.vimrc.local"
+    source $HOME/.vimrc.local
 endif

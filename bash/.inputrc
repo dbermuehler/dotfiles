@@ -7,7 +7,7 @@ set show-all-if-ambiguous on
 set skip-completed-text on
 
 # space will perform an history expansion, e.g. !!<space> will expand to the last command
-space:magic-space
+#space:magic-space
 
 # activate vi mode
 set editing-mode vi

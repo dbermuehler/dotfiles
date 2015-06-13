@@ -2,11 +2,12 @@
 #                     Variables                    #
 #--------------------------------------------------#
 
-export PATH="~/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 export PS1='[\w] \$ '
 export PROMPT_DIRTRIM=3
 export BROWSER=firefox
 export EDITOR=vim
+export BC_ENV_ARGS=~/.bcrc
 
 #--------------------------------------------------#
 #                     Aliases                      #
@@ -18,7 +19,9 @@ alias mkdir='mkdir -p'
 alias cp='cp -r'
 alias vim='vim -p'
 alias hg='history | grep' # may conflict with Mercurial, but since I'm not using it this will be no problem
-alias pps='ps -o "pid tty cmd" -fx'
+alias pps='ps -o "pid cmd" -fx'
+alias vim_private="vim -i NONE --cmd 'set noswapfile' --cmd 'set nobackup' --noplugin"
+alias bc='bc -l'
 
 #--------------------------------------------------#
 #                 History Settings                 #
@@ -50,7 +53,7 @@ complete -f rename
 
 # draw a horizontal line
 hr(){
-    yes -- ${@:-=} | tr -d $'\n' | head -c $COLUMNS
+    yes -- "${@:-\-}" | tr -d $'\n' | head -c $COLUMNS
 }
 
 function cd() {
@@ -80,7 +83,7 @@ psgrep() {
 }
 
 spawn() {
-    ($@ &) ; exit
+    ("$@" &) ; exit
 }
 
 rename() {
@@ -113,7 +116,7 @@ rename() {
     fi
 
     for file in "${files[@]}"; do
-        if ! new_file="$(eval "echo $file | sed -r $regex")"; then
+        if ! new_file="$(eval "sed -r $regex <<< $file")"; then
             echo "ERROR: Didn't rename $file due to an error in the regex"
             continue
         fi
@@ -130,6 +133,10 @@ rename() {
 
     IFS="$saveIFS"
     unset verbose regex file files saveIFS
+}
+
+calc () {
+    bc -l <<< "$@"
 }
 
 #--------------------------------------------------#

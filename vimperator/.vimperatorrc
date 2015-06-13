@@ -41,7 +41,7 @@ noremap : :js updateBottomBar(false)<CR>:
 noremap o :js updateBottomBar(false)<CR>o
 noremap O :js updateBottomBar(false)<CR>O
 noremap t :js updateBottomBar(false)<CR>t
-noremap T :js updateBottomBar(false)<CR>t
+noremap T :js updateBottomBar(false)<CR>T
 noremap / :js updateBottomBar(false)<CR>/
 cnoremap <CR> <CR>:js updateBottomBar()<CR>
 cnoremap <Esc> <Esc>:js updateBottomBar()<CR>
