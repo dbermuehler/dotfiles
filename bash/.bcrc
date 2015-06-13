@@ -1,0 +1,36 @@
+pi=4*a(1)
+
+e=e(1)
+
+define log(x) {
+    return l(x)/l(10)
+}
+
+define ld(x) {
+    return l(x)/l(2)
+}
+
+define ln(x) {
+    return l(x)
+}
+
+define floor(x) {
+    auto tmp
+    tmp = scale
+    scale = 0
+    x = x/1
+    scale = tmp
+    return x
+}
+
+define ceil(x) {
+    return floor(x) + 1
+}
+
+define abs(x) {
+    if(x < 0) {
+        return x*(-1)
+    } else {
+        return x
+    }
+}
