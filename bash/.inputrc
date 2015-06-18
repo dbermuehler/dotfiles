@@ -5,6 +5,7 @@ set mark-symlinked-directories on
 set show-all-if-ambiguous on
 # if completion is performed in the middle of line do not insert the already existing part of the line
 set skip-completed-text on
+set blink-matching-paren on
 
 # space will perform an history expansion, e.g. !!<space> will expand to the last command
 #space:magic-space

@@ -33,7 +33,7 @@ set lazyredraw " Dont update viewport until the marco has completed for faster p
 set wildmenu
 set wildmode=longest:full,full " first tab complete only longest common string, second tab complete to first element in list
 set wildignorecase " completion on files in command mode is now case insensitive
-set wildignore+=*.aux,*.out,*.toc " LaTeX intermediate files
+set wildignore+=*.aux,*.toc " LaTeX intermediate files
 set wildignore+=*.class " java class files
 
 " searching
@@ -66,6 +66,8 @@ augroup filetype_settings
 
     " Set correct filetype for external editing of the commandline content when invoking 'v' in bashs vi mode
     autocmd BufRead,BufNewFile bash-fc-* setlocal filetype=sh
+
+    autocmd BufRead,BufNewFile *Xresources.local setlocal filetype=xdefaults
 augroup END
 
 " spell checking
@@ -132,7 +134,6 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
     Plug 'scrooloose/syntastic'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
-    Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'tmhedberg/matchit'
     Plug 'inside/vim-search-pulse'
@@ -144,9 +145,11 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
     Plug 'chikamichi/mediawiki.vim'
     Plug 'gastonsimone/vim-dokumentary'
     Plug 'EinfachToll/DidYouMean'
+    Plug 'ervandew/supertab'
 
     if v:version >= 704
         Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
+        Plug 'SirVer/ultisnips'
     endif
 
     " Colorschemes

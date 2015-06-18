@@ -3,7 +3,7 @@
 #--------------------------------------------------#
 
 export PATH="$HOME/bin:$PATH"
-export PS1='[\w] \$ '
+export PS1=' \w\[\033[38;5;81m\] ❯ $(tput sgr0)'
 export PROMPT_DIRTRIM=3
 export BROWSER=firefox
 export EDITOR=vim
