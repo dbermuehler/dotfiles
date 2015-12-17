@@ -3,10 +3,11 @@
 #--------------------------------------------------#
 
 export PATH="$HOME/bin:$PATH"
-export PS1=' \w\[\033[38;5;81m\] ❯ $(tput sgr0)'
+export PS1=' \w\[\033[38;5;81m\] ❯ \[$(tput sgr0)\]'
 export PROMPT_DIRTRIM=3
 export BROWSER=firefox
 export EDITOR=vim
+export VISUAL=vim
 export BC_ENV_ARGS=~/.bcrc
 
 #--------------------------------------------------#
@@ -22,6 +23,7 @@ alias hg='history | grep' # may conflict with Mercurial, but since I'm not using
 alias pps='ps -o "pid cmd" -fx'
 alias vim_private="vim -i NONE --cmd 'set noswapfile' --cmd 'set nobackup' --noplugin"
 alias bc='bc -l'
+alias htop='htop -d 5' # starts htop with an update intervall of 500 ms
 
 #--------------------------------------------------#
 #                 History Settings                 #
@@ -135,7 +137,7 @@ rename() {
     unset verbose regex file files saveIFS
 }
 
-calc () {
+calc() {
     bc -l <<< "$@"
 }
 

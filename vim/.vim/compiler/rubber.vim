@@ -14,7 +14,7 @@ endif
 if filereadable('makefile')
   setlocal makeprg=make
 else
-  CompilerSet makeprg=make\ -f\ ~/Alles_Moegliche/LaTex/makefile
+  CompilerSet makeprg=make\ -f\ $HOME/.makefiles/latex_makefile
 endif
 
 CompilerSet errorformat=%f:%l:\ %m,%f:%l-%\\d%\\+:\ %m

@@ -1,5 +1,7 @@
 " Settings
 set noswapfile
+set nobackup
+set nowritebackup
 set backspace=indent,eol,start " allow backspacing over autoindent, line breaks and the beginning of insert mode
 set history=50
 set fileformats=unix,dos
@@ -14,11 +16,12 @@ set autoread " if a file outside of the current vim session is modified it can b
 set modelines=0 " don't need modelines and the potential security hazard
 set path=$PWD/**
 set shell=/bin/bash
+set autochdir
 
 " vim gui stuff
 set showmatch " show matching brackets/parenthesis
-set number
-set ruler " shows line numbers
+set ruler " shows line numbers in statusbar
+set number " show line numbers"
 set showcmd " show entered command in normal mode
 set showmode
 set ttyfast " send more characters for redraws
@@ -29,6 +32,12 @@ set t_Co=256 " activate 256 color support if your terminal supports it and haven
 "set listchars=tab:>-,trail:.,eol:$ " characters for tab, trailing spaces and eol when activate 'set list'
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " characters for tab, eol, etc. when activate 'set list'
 set lazyredraw " Dont update viewport until the marco has completed for faster processing.
+set background=dark
+
+"soft line wrap
+set wrap
+set linebreak
+set breakindent
 
 set wildmenu
 set wildmode=longest:full,full " first tab complete only longest common string, second tab complete to first element in list
@@ -57,7 +66,9 @@ filetype indent on " indention for known file extensions
 set omnifunc=syntaxcomplete#Complete
 
 let g:tex_flavor = 'latex' " set the flavor for tex files to latex for correct syntax highlighting etc.
-let g:markdown_fenced_languages = ['xml', 'html', 'sql', 'python', 'java', 'tex', 'sh'] " enables syntax highlighting for these languages in markdown code blocks
+let g:markdown_fenced_languages = ['xml', 'html', 'sql', 'python', 'java', 'tex', 'bash=sh'] " enables syntax highlighting for these languages in markdown code blocks
+
+let g:netrw_browsex_viewer = 'firefox'
 
 augroup filetype_settings
     autocmd!
@@ -71,8 +82,9 @@ augroup filetype_settings
 augroup END
 
 " spell checking
-set thesaurus+=~/.vim/openthesaurus.txt
-set spelllang=de,en
+set thesaurus+=~/.vim/thesaurus-de.txt
+set thesaurus+=~/.vim/thesaurus-en.txt
+set spelllang=de,en_gb
 
 " Custome key mappings
 noremap <C-j> :bnext<CR>
@@ -86,6 +98,12 @@ nnoremap <Left> <C-w>h
 nnoremap <Down> <C-w>j
 nnoremap <Up> <C-w>k
 nnoremap <Right> <C-w>l
+
+" because of soft wrap
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 " clears the last search pattern to disable highlighting
 map <silent> <leader>h :let @/ = ""<CR>
@@ -102,7 +120,10 @@ function! Run(...)
        let args = args . ' ' . i
     endfor
 
+    execute "write"
+
     if &filetype == "java"
+        execute "make"
         execute "!java " . args . " " . expand("%:r")
     elseif &filetype == "tex"
         execute "silent !zathura --fork " . args . " " . expand("%:r") . ".pdf >& /dev/null"
@@ -111,20 +132,28 @@ function! Run(...)
     elseif &filetype == "python"
         execute "!python " . args . " " . expand ("%")
     elseif &filetype == "html"
-        execute "silent! !firefox " . expand("%") . " >& /dev/null"
-        execute "redraw!"
-    elseif &filetype == "markdown"
-        execute "silent !zathura --fork " . args . " " . expand("%:r") . ".pdf >& /dev/null"
+        execute "silent! !xdg-open " . expand("%") . " >& /dev/null"
+    elseif &filetype =~ "markdown.*"
+        if &makeprg =~ "pandoc .* -t revealjs .*"
+            execute "silent! !xdg-open " . expand("%:r") . ".html >& /dev/null"
+        else
+            execute "silent !zathura --fork " . args . " " . expand("%:r") . ".pdf >& /dev/null"
+        endif
     elseif &filetype == "prolog"
         execute "!swipl " . args . " " . expand ("%")
     else
         echoerr "Error: Run() isn't defined for this filetype."
     endif
+
+    execute "redraw!"
 endfunction
 
 command! -nargs=* Run call Run(<f-args>)
 
 if filereadable($HOME."/.vim/autoload/plug.vim")
+
+    let g:plug_threads = 50
+
     " Plug Settings
     call plug#begin('~/.vim/plugged')
 
@@ -137,15 +166,19 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
     Plug 'honza/vim-snippets'
     Plug 'tmhedberg/matchit'
     Plug 'inside/vim-search-pulse'
-    Plug 'Matt-Deacalion/vim-systemd-syntax'
-    Plug 'ivalkeen/vim-simpledb'
     Plug 'airblade/vim-gitgutter'
     Plug 'junegunn/vim-peekaboo'
     Plug 'ntpeters/vim-better-whitespace'
-    Plug 'chikamichi/mediawiki.vim'
     Plug 'gastonsimone/vim-dokumentary'
     Plug 'EinfachToll/DidYouMean'
-    Plug 'ervandew/supertab'
+    Plug 'mmai/vim-markdown-wiki'
+    Plug 'MattesGroeger/vim-bookmarks'
+
+    " Syntax Plugins
+    Plug 'Matt-Deacalion/vim-systemd-syntax'
+    Plug 'ivalkeen/vim-simpledb'
+    Plug 'tfnico/vim-gradle'
+    Plug 'chikamichi/mediawiki.vim'
 
     if v:version >= 704
         Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}

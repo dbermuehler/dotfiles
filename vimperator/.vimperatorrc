@@ -1,7 +1,6 @@
 " Settings
 set hintchars=hjklasdf
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
-set tabnumbers=true
 " Follow the selected hint on <Return>
 set followhints=1
 set scroll=3
