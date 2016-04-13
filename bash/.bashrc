@@ -23,7 +23,8 @@ alias hg='history | grep' # may conflict with Mercurial, but since I'm not using
 alias pps='ps -o "pid cmd" -fx'
 alias vim_private="vim -i NONE --cmd 'set noswapfile' --cmd 'set nobackup' --noplugin"
 alias bc='bc -l'
-alias htop='htop -d 5' # starts htop with an update intervall of 500 ms
+alias htop='htop -d 10' # starts htop with an update intervall of 1000 ms
+alias weather='curl http://wttr.in/'
 
 #--------------------------------------------------#
 #                 History Settings                 #
@@ -47,7 +48,6 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 complete -cf spawn
-complete -f rename
 
 #--------------------------------------------------#
 #                    Functions                     #
@@ -55,7 +55,7 @@ complete -f rename
 
 # draw a horizontal line
 hr(){
-    yes -- "${@:-\-}" | tr -d $'\n' | head -c $COLUMNS
+    yes -- "${@:-"-"}" | tr -d $'\n' | head -c $COLUMNS
 }
 
 function cd() {
@@ -86,55 +86,6 @@ psgrep() {
 
 spawn() {
     ("$@" &) ; exit
-}
-
-rename() {
-    # change the internal field seperator, so that we can handle filenames with spaces correctly
-    saveIFS="$IFS"
-    IFS=$(echo -en "\n\b")
-
-    unset verbose regex file files
-
-    # only print out the old and new file but don't rename the file
-    if [ "$1" = "-v" ]; then
-        verbose=1
-        shift
-    fi
-
-    if [ $# -lt 2 ]; then
-        echo "Usage: rename [-v] sedexpr filenames"
-        echo "Example: rename 's/lecture([0-9])\.pdf/Lecture_0\1.pdf/' lecture*"
-        return
-    fi
-
-    regex="'$1'"
-    shift
-    files=($@)
-
-    # check if the files to rename exist
-    if ! ls "$@" >& /dev/null; then
-        echo "Couldn't rename files: files or directory not found"
-        return
-    fi
-
-    for file in "${files[@]}"; do
-        if ! new_file="$(eval "sed -r $regex <<< $file")"; then
-            echo "ERROR: Didn't rename $file due to an error in the regex"
-            continue
-        fi
-
-        # no change in filename -> no need to rename
-        [ "$file" = "$new_file" ] && continue
-
-        if [ "$verbose" ]; then
-            echo "$file -> $new_file"
-        else
-            mv "$file" "$new_file"
-        fi
-    done
-
-    IFS="$saveIFS"
-    unset verbose regex file files saveIFS
 }
 
 calc() {

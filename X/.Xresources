@@ -34,6 +34,3 @@ xterm*foreground: #ffffff
 !white
 *color7:     #DBDCDC
 *color15:    #FDFDFD
-
-! include do not expand ~ or the $HOME variable
-#include "../../.Xresources.local"

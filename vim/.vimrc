@@ -66,14 +66,17 @@ filetype indent on " indention for known file extensions
 set omnifunc=syntaxcomplete#Complete
 
 let g:tex_flavor = 'latex' " set the flavor for tex files to latex for correct syntax highlighting etc.
-let g:markdown_fenced_languages = ['xml', 'html', 'sql', 'python', 'java', 'tex', 'bash=sh'] " enables syntax highlighting for these languages in markdown code blocks
+let g:markdown_fenced_languages = ['xml', 'html', 'sql', 'python', 'java', 'tex', 'bash=sh', 'javascript', 'js=javascript'] " enables syntax highlighting for these languages in markdown code blocks
 
 let g:netrw_browsex_viewer = 'firefox'
+
+let g:xml_syntax_folding=1
 
 augroup filetype_settings
     autocmd!
     autocmd FileType sql setlocal commentstring=--\ %s
     autocmd FileType xdefaults setlocal commentstring=\!\ %s
+    autocmd FileType xml setlocal foldmethod=syntax
 
     " Set correct filetype for external editing of the commandline content when invoking 'v' in bashs vi mode
     autocmd BufRead,BufNewFile bash-fc-* setlocal filetype=sh
@@ -158,11 +161,11 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
     call plug#begin('~/.vim/plugged')
 
     " load Plugins
-    Plug 'Raimondi/delimitMate'
     Plug 'majutsushi/tagbar'
     Plug 'scrooloose/syntastic'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
+    Plug 'jiangmiao/auto-pairs'
     Plug 'honza/vim-snippets'
     Plug 'tmhedberg/matchit'
     Plug 'inside/vim-search-pulse'
