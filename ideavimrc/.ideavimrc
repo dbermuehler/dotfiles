@@ -1,0 +1,6 @@
+source ~/.vimrc
+
+nmap gcc :action CommentByLineComment<CR>k
+nmap <C-o> :action Back<CR>
+nmap <C-i> :action Forward<CR>
+nmap <Leader>h :set hlsearch!<CR>

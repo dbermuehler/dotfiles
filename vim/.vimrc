@@ -1,4 +1,5 @@
 " Settings
+set encoding=utf-8
 set noswapfile
 set nobackup
 set nowritebackup
@@ -27,7 +28,7 @@ set showmode
 set ttyfast " send more characters for redraws
 set scrolloff=3 " shows the next or previous 3 lines under or above the cursor
 set scroll=10
-set visualbell
+set novisualbell
 set t_Co=256 " activate 256 color support if your terminal supports it and haven't configured to use it
 "set listchars=tab:>-,trail:.,eol:$ " characters for tab, trailing spaces and eol when activate 'set list'
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " characters for tab, eol, etc. when activate 'set list'
@@ -170,11 +171,8 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
     Plug 'tmhedberg/matchit'
     Plug 'inside/vim-search-pulse'
     Plug 'airblade/vim-gitgutter'
-    Plug 'junegunn/vim-peekaboo'
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'gastonsimone/vim-dokumentary'
-    Plug 'EinfachToll/DidYouMean'
-    Plug 'mmai/vim-markdown-wiki'
     Plug 'MattesGroeger/vim-bookmarks'
 
     " Syntax Plugins
