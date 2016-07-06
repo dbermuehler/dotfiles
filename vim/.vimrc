@@ -38,7 +38,6 @@ set background=dark
 "soft line wrap
 set wrap
 set linebreak
-set breakindent
 
 set wildmenu
 set wildmode=longest:full,full " first tab complete only longest common string, second tab complete to first element in list
@@ -91,8 +90,6 @@ set thesaurus+=~/.vim/thesaurus-en.txt
 set spelllang=de,en_gb
 
 " Custome key mappings
-noremap <C-j> :bnext<CR>
-noremap <C-k> :bprevious<CR>
 noremap <C-h> :tabprevious<CR>
 noremap <C-l> :tabNext<CR>
 nnoremap <leader>b :ls<CR>:b<Space>
@@ -174,6 +171,7 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'gastonsimone/vim-dokumentary'
     Plug 'MattesGroeger/vim-bookmarks'
+    Plug 'matze/vim-move'
 
     " Syntax Plugins
     Plug 'Matt-Deacalion/vim-systemd-syntax'
@@ -182,6 +180,7 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
     Plug 'chikamichi/mediawiki.vim'
 
     if v:version >= 704
+        set breakindent
         Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
         Plug 'SirVer/ultisnips'
     endif
@@ -199,12 +198,12 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
 
     let g:syntastic_check_on_wq = 0
 
+    let g:move_key_modifier = 'C'
+
     " let g:NERDTreeWinSize = 25
     " let g:NERDTreeWinPos = 'right'
     " let g:NERDTreeMinimalUI = 1
     " let g:NERDTreeHighlightCursorline = 1
-
-    let g:peekaboo_delay = 750
 
     let g:neocomplete#enable_at_startup = 0
     let g:neocomplete#enable_smart_case = 1

@@ -24,7 +24,6 @@ alias pps='ps -o "pid cmd" -fx'
 alias vim_private="vim -i NONE --cmd 'set noswapfile' --cmd 'set nobackup' --noplugin"
 alias bc='bc -l'
 alias htop='htop -d 10' # starts htop with an update intervall of 1000 ms
-alias weather='curl http://wttr.in/'
 
 #--------------------------------------------------#
 #                 History Settings                 #
@@ -80,9 +79,11 @@ sp(){
     fi
 }
 
-psgrep() {
-    ps -o "pid user:10 tty cmd" -ax | grep "$@" | grep -v grep
-}
+if ! which psgrep >& /dev/null; then
+    psgrep() {
+        ps -o "pid user:10 tty cmd" -ax | grep "$@" | grep -v grep
+    }
+fi
 
 spawn() {
     ("$@" &) ; exit
