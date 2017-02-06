@@ -68,7 +68,7 @@ set omnifunc=syntaxcomplete#Complete
 let g:tex_flavor = 'latex' " set the flavor for tex files to latex for correct syntax highlighting etc.
 let g:markdown_fenced_languages = ['xml', 'html', 'sql', 'python', 'java', 'tex', 'bash=sh', 'javascript', 'js=javascript'] " enables syntax highlighting for these languages in markdown code blocks
 
-let g:netrw_browsex_viewer = 'firefox'
+let g:netrw_browsex_viewer = 'chromium'
 
 let g:xml_syntax_folding=1
 
@@ -138,10 +138,8 @@ function! Run(...)
         if &makeprg =~ "pandoc .* -t revealjs .*"
             execute "silent! !xdg-open " . expand("%:r") . ".html >& /dev/null"
         else
-            execute "silent !zathura --fork " . args . " " . expand("%:r") . ".pdf >& /dev/null"
+            execute "silent !xdg-open " . args . " " . expand("%:r") . ".pdf >& /dev/null"
         endif
-    elseif &filetype == "prolog"
-        execute "!swipl " . args . " " . expand ("%")
     else
         echoerr "Error: Run() isn't defined for this filetype."
     endif
@@ -172,6 +170,7 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
     Plug 'gastonsimone/vim-dokumentary'
     Plug 'MattesGroeger/vim-bookmarks'
     Plug 'matze/vim-move'
+    Plug 'alcesleo/vim-uppercase-sql'
 
     " Syntax Plugins
     Plug 'Matt-Deacalion/vim-systemd-syntax'

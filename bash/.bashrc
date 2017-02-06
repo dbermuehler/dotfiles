@@ -3,9 +3,9 @@
 #--------------------------------------------------#
 
 export PATH="$HOME/bin:$PATH"
-export PS1=' \w\[\033[38;5;81m\] ❯ \[$(tput sgr0)\]'
+export PS1=' \w\[\033[38;5;81m\] > \[$(tput sgr0)\]'
 export PROMPT_DIRTRIM=3
-export BROWSER=firefox
+export BROWSER=chromium
 export EDITOR=vim
 export VISUAL=vim
 export BC_ENV_ARGS=~/.bcrc
@@ -93,6 +93,10 @@ calc() {
     bc -l <<< "$@"
 }
 
+th() {
+    qlua -e "require('trepl')()"
+}
+
 #--------------------------------------------------#
 #                     Misc                         #
 #--------------------------------------------------#
@@ -112,3 +116,6 @@ fi
 #--------------------------------------------------#
 
 . ~/.bashrc.local
+
+
+. /home/mitzekotze/torch/install/bin/torch-activate
