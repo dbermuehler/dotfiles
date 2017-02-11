@@ -111,11 +111,9 @@ if [ -t 0 ]; then
     stty -ixon
 fi
 
+
 #--------------------------------------------------#
 #              Import local settings               #
 #--------------------------------------------------#
 
 . ~/.bashrc.local
-
-
-. /home/mitzekotze/torch/install/bin/torch-activate
