@@ -5,7 +5,6 @@
 export PATH="$HOME/bin:$PATH"
 export PS1=' \w\[\033[38;5;81m\] > \[$(tput sgr0)\]'
 export PROMPT_DIRTRIM=3
-export BROWSER=chromium
 export EDITOR=vim
 export VISUAL=vim
 export BC_ENV_ARGS=~/.bcrc
@@ -24,6 +23,8 @@ alias pps='ps -o "pid cmd" -fx'
 alias vim_private="vim -i NONE --cmd 'set noswapfile' --cmd 'set nobackup' --noplugin"
 alias bc='bc -l'
 alias htop='htop -d 10' # starts htop with an update intervall of 1000 ms
+alias doch='su -c "$(history -p !-1)"'
+alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip'
 
 #--------------------------------------------------#
 #                 History Settings                 #
@@ -93,10 +94,6 @@ calc() {
     bc -l <<< "$@"
 }
 
-th() {
-    qlua -e "require('trepl')()"
-}
-
 #--------------------------------------------------#
 #                     Misc                         #
 #--------------------------------------------------#
@@ -111,9 +108,8 @@ if [ -t 0 ]; then
     stty -ixon
 fi
 
-
 #--------------------------------------------------#
 #              Import local settings               #
 #--------------------------------------------------#
 
-. ~/.bashrc.local
+[ -f ~/.bashrc.local ] && . ~/.bashrc.local

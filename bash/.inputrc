@@ -23,9 +23,10 @@ Control-l: clear-screen
 # show colors in the completion preview
 set colored-stats on
 # show an indicator at the beginning of the prompt in which (vi) mode we are
-set show-mode-in-prompt on
-set vi-ins-mode-string \2+\2
-set vi-cmd-mode-string \2-\2
+# deactivated for now because of a bash bug
+#set show-mode-in-prompt on
+#set vi-ins-mode-string \2+\2
+#set vi-cmd-mode-string \2-\2
 # wait 100 ms after the escape key has been pressed
 set keyseq-timeout 100
 
