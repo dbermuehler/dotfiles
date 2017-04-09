@@ -1,7 +1,7 @@
 #!/bin/bash
 
-FIRST_MONITOR="LVDS-1"
-SECOND_MONITOR="$(xrandr | sed -nr 's/(VGA-[0-9]).+/\1/p')"
+FIRST_MONITOR="$(xrandr | sed -nr 's/(LVDS-*[0-9]).+/\1/p')"
+SECOND_MONITOR="$(xrandr | sed -nr 's/(VGA-*[0-9]).+/\1/p')"
 
 hc() {
     herbstclient "$@"

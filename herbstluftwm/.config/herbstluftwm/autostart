@@ -5,6 +5,7 @@
 hc() {
     herbstclient "$@"
 }
+HC_BIN="${XDG_CONFIG_HOME:-$HOME/.config/herbstluftwm/bin}"
 
 hc emit_hook reload
 
@@ -35,12 +36,12 @@ hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind Mod4-x spawn dmenu_run -i -h 23
-hc keybind $Mod-m spawn ${XDG_CONFIG_HOME:-$HOME/.config/herbstluftwm/bin}/herbstcommander.sh
+hc keybind $Mod-m spawn $HC_BIN/herbstcommander.sh
 hc keybind $Mod-Return spawn ${TERMINAL:-xterm}
 
 # layouting
 hc keybind $Mod-r remove
-hc keybind $Mod-space spawn ${XDG_CONFIG_HOME:-$HOME/.config/herbstluftwm/bin/}layout_change.sh
+hc keybind $Mod-space spawn $HC_BIN/layout_change.sh
 hc keybind $Mod-u split vertical 0.5
 hc keybind $Mod-o split horizontal 0.5
 hc keybind $Mod-s floating toggle
@@ -80,7 +81,14 @@ hc keybind $Mod-comma use_index -1 --skip-visible
 hc keybind $Mod-Shift-period move_index +1
 hc keybind $Mod-Shift-comma move_index -1
 
-hc keybind $Mod-Shift-m spawn ${XDG_CONFIG_HOME:-$HOME/.config/herbstluftwm/bin/}merge_tag.sh
+hc keybind $Mod-Shift-m spawn $HC_BIN/merge_tag.sh
+
+# screen handling
+hc keybind Ctrl-Mod4-Up spawn $HC_BIN/monitor_manager.sh up
+hc keybind Ctrl-Mod4-Down spawn $HC_BIN/monitor_manager.sh down
+hc keybind Ctrl-Mod4-Right spawn $HC_BIN/monitor_manager.sh right
+hc keybind Ctrl-Mod4-Left spawn $HC_BIN/monitor_manager.sh left
+hc keybind Ctrl-Mod4-Return spawn $HC_BIN/monitor_manager.sh single
 
 hc rename default 1
 hc add 2
