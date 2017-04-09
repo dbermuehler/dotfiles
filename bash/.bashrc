@@ -53,9 +53,7 @@ shopt -s cmdhist # save all lines of a multiple-line command in the same history
 #                 Tab Completion                   #
 #--------------------------------------------------#
 
-if [ -f /etc/bash_completion ]; then
-   . /etc/bash_completion.d/*
-fi
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 complete -cf spawn
 
