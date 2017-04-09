@@ -197,6 +197,8 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
     let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
     let g:UltiSnipsSnippetDirectories=["UltiSnips", "$HOME/.vim/plugged/vim-snippets/UltiSnips"]
 
+    let g:vimwiki_list = [{'path': '$HOME/Dropbox/wiki'}]
+
     let g:syntastic_check_on_wq = 0
 
     let g:move_key_modifier = 'C'
