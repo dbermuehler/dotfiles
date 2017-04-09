@@ -3,11 +3,21 @@
 #--------------------------------------------------#
 
 export PATH="$HOME/bin:$PATH"
-export PS1=' \w\[\033[38;5;81m\] > \[$(tput sgr0)\]'
 export PROMPT_DIRTRIM=3
 export EDITOR=vim
 export VISUAL=vim
 export BC_ENV_ARGS=~/.bcrc
+
+if [ "$SSH_CONNECTION" ]; then
+    PROMPT_HOSTNAME=" | \\h"
+fi
+if [ "$UID" -ne 0 ]; then
+    PROMPT_COLOR="\[\033[38;5;81m\]"
+else
+    PROMPT_COLOR="\[\033[38;5;160m\]"
+fi
+
+export PS1=" \w$PROMPT_HOSTNAME$PROMPT_COLOR > \[$(tput sgr0)\]"
 
 #--------------------------------------------------#
 #                     Aliases                      #
