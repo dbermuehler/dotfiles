@@ -84,11 +84,11 @@ hc keybind $Mod-Shift-comma move_index -1
 hc keybind $Mod-Shift-m spawn $HC_BIN/merge_tag.sh
 
 # screen handling
-hc keybind Ctrl-Mod4-Up spawn $HC_BIN/monitor_manager.sh up
-hc keybind Ctrl-Mod4-Down spawn $HC_BIN/monitor_manager.sh down
-hc keybind Ctrl-Mod4-Right spawn $HC_BIN/monitor_manager.sh right
-hc keybind Ctrl-Mod4-Left spawn $HC_BIN/monitor_manager.sh left
-hc keybind Ctrl-Mod4-Return spawn $HC_BIN/monitor_manager.sh single
+hc keybind $Mod-Ctrl-Up spawn $HC_BIN/monitor_manager.sh up
+hc keybind $Mod-Ctrl-Down spawn $HC_BIN/monitor_manager.sh down
+hc keybind $Mod-Ctrl-Right spawn $HC_BIN/monitor_manager.sh right
+hc keybind $Mod-Ctrl-Left spawn $HC_BIN/monitor_manager.sh left
+hc keybind $Mod-Ctrl-Return spawn $HC_BIN/monitor_manager.sh single
 
 hc rename default 1
 hc add 2

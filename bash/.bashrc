@@ -102,7 +102,6 @@ calc() {
     bc -l <<< "$@"
 }
 
-# Battery status
 battery() {
     if [ -e "/sys/class/power_supply/BAT0" ]; then
         BAT_PATH="/sys/class/power_supply/BAT0"

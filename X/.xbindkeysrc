@@ -1,0 +1,36 @@
+"(amixer set Master 2%-;volnoti-osd.sh)"
+    m:0x0 + c:122
+    XF86AudioLowerVolume
+"(amixer set Master 2%+;volnoti-osd.sh)"
+    m:0x0 + c:123
+    XF86AudioRaiseVolume
+"(amixer set Master toggle;volnoti-osd.sh)"
+    m:0x0 + c:121
+    XF86AudioMute
+"(mpc toggle)"
+     XF86AudioPlay
+"(mpc next)"
+     XF86AudioNext
+"(mpc prev)"
+     XF86AudioPrev
+"(mpc stop)"
+     XF86AudioStop
+"(urxvt -e bc -l)"
+     XF86Calculator
+"(mpv -vf screenshot tv://)"
+     XF86WebCam
+"()"
+     XF86Launch1
+"()"
+     XF86Launch6
+"(xrandr --auto)"
+     XF86Display
+"trackpad-toggle.sh"
+    m:0x10 + c:199
+    Mod2 + XF86TouchpadToggle
+"(xbacklight -inc 20)"
+    m:0x0 + c:233
+    XF86MonBrightnessUp
+"(xbacklight -dec 20)"
+    m:0x0 + c:232
+    XF86MonBrightnessDown
