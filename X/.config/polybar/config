@@ -1,4 +1,4 @@
-; Requirements: polybar-git, ttf-font-awesome, wirless_tools, ttf-inconsolata; openconnect (for vpn)
+; Requirements: polybar-git, ttf-font-awesome, wirless_tools, ttf-inconsolata, openconnect (for vpn), wally (with nitrogen)
 
 [config]
 monitor = LVDS-1
@@ -27,7 +27,7 @@ font-0 = Inconsolata:pixelsize=14
 font-1 = FontAwesome:pixelsize=14
 
 modules-left = ewmh
-modules-center = vpn tether wlan eth battery volume date time
+modules-center = vpn tether wlan eth battery volume date time wallpaper
 
 tray-position = right
 tray-padding = 2
@@ -143,6 +143,12 @@ label-empty = %name%
 
 label-active-foreground = #000
 label-active-background = #fff
+
+[module/wallpaper]
+type = custom/script
+exec = "wally -r"
+interval = 1800
+label =
 
 [settings]
 screenchange-reload = true
