@@ -1,4 +1,4 @@
-; Requirements: polybar-git, FontAwesome, wirless_tools, FontInconsolata; openconnect (for vpn)
+; Requirements: polybar-git, ttf-font-awesome, wirless_tools, ttf-inconsolata; openconnect (for vpn)
 
 [config]
 monitor = LVDS-1
