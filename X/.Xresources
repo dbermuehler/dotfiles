@@ -64,7 +64,7 @@ URxvt.saveLines: 100000
 ! URxvt.font: xft:Terminus:size=8,xft:Noto Color Emoji
 ! URxvt.font: xft:DejaVu Sans Mono:size=10:antialias=true
 ! URxvt.font: xft:Droid Sans Mono:size=10:antialias=true
-URxvt*font:xft:Inconsolata:size=12
+URxvt*font:xft:Inconsolata:size=12,xft:FontAwesome
 URxvt*boldFont: xft:Inconsolata:style=bold:size=12
 URxvt*letterSpace: -1
 
@@ -75,8 +75,6 @@ URxvt.background: black
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
-
-dzen2.font: terminus
 
 ! For these setting to work, you must use a version patched with xrdb support, like dmenu2.
 ! See http://tools.suckless.org/dmenu/patches/xrdb
