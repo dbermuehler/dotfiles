@@ -14,7 +14,7 @@ set undodir=~/.vimundo/ " if undofile is activated, a directory is needed where 
 set tags=./tags;
 set completeopt=menu,preview,longest
 set autoread " if a file outside of the current vim session is modified it can be read in by :checktime, see :help E321
-set modelines=0 " don't need modelines and the potential security hazard
+set modelines=1 " activate per file settings
 set path=$PWD/**
 set shell=/bin/bash
 set autochdir

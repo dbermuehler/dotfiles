@@ -34,8 +34,8 @@ right() {
 left() {
    xrandr --auto
    xrandr --output "$SECOND_MONITOR" --left-of $FIRST_MONITOR
-   hc pad 0 0
-   hc pad 1 25
+   hc pad 1 0
+   hc pad 0 25
    hc emit_hook monitor_changed
 }
 
@@ -63,4 +63,6 @@ case "$1" in
        *) auto;;
 esac
 
+killall polybar
+polybar main &
 nitrogen --restore

@@ -96,7 +96,7 @@ label-muted = Muted
 [module/battery]
 type = internal/battery
 battery = ${config.battery}
-adapter = AC0
+adapter = ${config.adapter}
 full-at = 96
 
 format-full = <label-full>
@@ -152,3 +152,5 @@ label =
 
 [settings]
 screenchange-reload = true
+
+; vim:filetype=dosini
