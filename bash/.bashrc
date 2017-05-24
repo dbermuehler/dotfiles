@@ -2,7 +2,7 @@
 #                     Variables                    #
 #--------------------------------------------------#
 
-export PATH="$HOME/bin:$PATH"
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
 export PROMPT_DIRTRIM=3
 export EDITOR=vim
 export VISUAL=vim
