@@ -1,11 +1,12 @@
 ; Requirements: polybar-git, ttf-font-awesome, wirless_tools, ttf-inconsolata, openconnect (for vpn), wally (with nitrogen)
 
 [config]
-monitor = LVDS-1
-monitor-fallback = LVDS1
-lan_inf = eth0
-wlan_inf = wlan0
-battery = BAT0
+monitor = ${xrdb:polybar*monitor:LVDS-1}
+monitor-fallback = ${xrdb:polybar*monitor-fallback:LVDS1}
+lan_inf = ${xrdb:polybar*lan_inf:enp6s0}
+wlan_inf = ${xrdb:polybar*wlan_inf:wlp2s0}
+battery = ${xrdb:polybar*battery:BAT1}
+adapter = ${xrdb:polybar*adapter:ADP1}
 
 [colors]
 background = #111111

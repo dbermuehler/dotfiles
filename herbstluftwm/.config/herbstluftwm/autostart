@@ -38,6 +38,7 @@ hc keybind $Mod-Shift-c close
 hc keybind Mod4-x spawn dmenu_run -i -h 23
 hc keybind $Mod-m spawn $HC_BIN/herbstcommander.sh
 hc keybind $Mod-Return spawn ${TERMINAL:-xterm}
+hc keybind Ctrl-Mod1-l spawn lock_monitor.sh
 
 # layouting
 hc keybind $Mod-r remove

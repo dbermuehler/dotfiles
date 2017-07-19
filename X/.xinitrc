@@ -11,12 +11,13 @@ xrdb -merge ~/.Xresources
 xrdb -merge ~/.Xresources.local
 
 xset r rate 200 30
+synclient PalmDetect=1
 
 xbindkeys &
 volnoti &
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
-    eval $(ssh-agent -t 7200)
+    eval $(ssh-agent)
 fi
 
 # autocutsel -fork
