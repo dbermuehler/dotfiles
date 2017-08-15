@@ -67,7 +67,7 @@ hr(){
 }
 
 function cd() {
-    if [[ -z "$@" ]]; then
+    if [[ -z "$*" ]]; then
         clear
         builtin cd
     else
@@ -125,7 +125,7 @@ battery() {
 }
 
 activate() {
-    source ~/PythonEnv/$1/bin/activate
+    source ~/PythonEnv/"$1"/bin/activate
 }
 
 #--------------------------------------------------#

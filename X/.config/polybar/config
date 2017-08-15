@@ -68,6 +68,7 @@ interval = 5
 date = %d.%m.
 label = %date%
 
+label-foreground = ${root.foreground}
 format-prefix = "Date:"
 format-prefix-foreground = ${colors.foreground-alt}
 
@@ -78,6 +79,7 @@ interval = 5
 time = %H:%M
 label = %time%
 
+label-foreground = ${root.foreground}
 format-prefix = "Time:"
 format-prefix-foreground = ${colors.foreground-alt}
 
