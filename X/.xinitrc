@@ -12,6 +12,7 @@ xrdb -merge ~/.Xresources.local
 
 xset r rate 200 30
 synclient PalmDetect=1
+synclient PalmMinWidth=8
 
 xbindkeys &
 volnoti &
