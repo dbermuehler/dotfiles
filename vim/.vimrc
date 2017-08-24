@@ -1,3 +1,9 @@
+if has('win32') || has ('win64')
+    let $VIMHOME = $VIM."/vimfiles"
+else
+    let $VIMHOME = $HOME."/.vim"
+endif
+
 " Settings
 set encoding=utf-8
 set noswapfile
@@ -16,7 +22,6 @@ set completeopt=menu,preview,longest
 set autoread " if a file outside of the current vim session is modified it can be read in by :checktime, see :help E321
 set modelines=1 " activate per file settings
 set path=$PWD/**
-set shell=/bin/bash
 set autochdir
 
 " vim gui stuff
@@ -85,8 +90,8 @@ augroup filetype_settings
 augroup END
 
 " spell checking
-set thesaurus+=~/.vim/thesaurus-de.txt
-set thesaurus+=~/.vim/thesaurus-en.txt
+set thesaurus+=$VIMHOME/thesaurus-de.txt
+set thesaurus+=$VIMHOME/thesaurus-en.txt
 set spelllang=de,en_gb
 
 " Custome key mappings
@@ -149,12 +154,12 @@ endfunction
 
 command! -nargs=* Run call Run(<f-args>)
 
-if filereadable($HOME."/.vim/autoload/plug.vim")
+if filereadable($VIMHOME."/autoload/plug.vim")
 
     let g:plug_threads = 50
 
     " Plug Settings
-    call plug#begin('~/.vim/plugged')
+    call plug#begin('$VIMHOME/plugged')
 
     " load Plugins
     Plug 'majutsushi/tagbar'
@@ -182,8 +187,14 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
 
     if v:version >= 704
         set breakindent
-        Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
-        Plug 'SirVer/ultisnips'
+
+        if has('python')
+            Plug 'SirVer/ultisnips'
+        endif
+
+        if has('lua')
+            Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
+        endif
     endif
 
     " Colorschemes
@@ -195,7 +206,7 @@ if filereadable($HOME."/.vim/autoload/plug.vim")
     let g:UltiSnipsEditSplit = "horizontal"
     let g:UltiSnipsJumpForwardTrigger = "<tab>"
     let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-    let g:UltiSnipsSnippetDirectories=["UltiSnips", "$HOME/.vim/plugged/vim-snippets/UltiSnips"]
+    let g:UltiSnipsSnippetDirectories=["UltiSnips", "$VIMHOME/plugged/vim-snippets/UltiSnips"]
 
     let g:vimwiki_list = [{'path': '$HOME/Dropbox/wiki'}]
 
