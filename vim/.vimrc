@@ -1,5 +1,5 @@
 if has('win32') || has ('win64')
-    let $VIMHOME = $VIM."/vimfiles"
+    let $VIMHOME = $HOME."/vimfiles"
 else
     let $VIMHOME = $HOME."/.vim"
 endif
@@ -159,7 +159,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     let g:plug_threads = 50
 
     " Plug Settings
-    call plug#begin('$VIMHOME/plugged')
+    call plug#begin($VIMHOME."/plugged")
 
     " load Plugins
     Plug 'majutsushi/tagbar'
@@ -262,7 +262,7 @@ endif
 try
     colorscheme hybrid
 catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme default
+    colorscheme desert
 endtry
 
 if filereadable($HOME."/.vimrc.local")
