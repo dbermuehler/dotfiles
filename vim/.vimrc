@@ -1,7 +1,9 @@
 if has('win32') || has ('win64')
     let $VIMHOME = $HOME."/vimfiles"
+    let $MDCTAGS = $HOME."/bin/markdown2ctags.py"
 else
     let $VIMHOME = $HOME."/.vim"
+    let $MDCTAGS = "/usr/bin/markdown2ctags"
 endif
 
 " Settings
@@ -237,10 +239,10 @@ if filereadable($VIMHOME."/autoload/plug.vim")
         \ 'sort'    : 0,
     \ }
 
-    if filereadable("/usr/bin/markdown2ctags")
+    if filereadable($MDCTAGS)
         let g:tagbar_type_markdown = {
             \ 'ctagstype': 'markdown',
-            \ 'ctagsbin' : '/usr/bin/markdown2ctags',
+            \ 'ctagsbin' : $MDCTAGS,
             \ 'ctagsargs' : '-f - --sort=yes',
             \ 'kinds' : [
                 \ 's:sections',
