@@ -97,8 +97,6 @@ set thesaurus+=$VIMHOME/thesaurus-en.txt
 set spelllang=de,en_gb
 
 " Custome key mappings
-noremap <C-h> :tabprevious<CR>
-noremap <C-l> :tabNext<CR>
 nnoremap <leader>b :ls<CR>:b<Space>
 
 " use the arrow key to move between windows
@@ -181,6 +179,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'junegunn/fzf.vim'
     Plug 'vimwiki/vimwiki'
     Plug 'tell-k/vim-autopep8'
+    Plug 'andrewradev/sideways.vim'
 
     " Syntax Plugins
     Plug 'Matt-Deacalion/vim-systemd-syntax'
@@ -262,6 +261,9 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     map ° :Ag <c-r>=expand("<cword>")<cr><cr>
 
     let g:autopep8_disable_show_diff=1
+
+    nnoremap <c-h> :SidewaysLeft<cr>
+    nnoremap <c-l> :SidewaysRight<cr>
 endif
 
 try
