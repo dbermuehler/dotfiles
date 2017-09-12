@@ -28,9 +28,9 @@
 "trackpad-toggle.sh"
     m:0x10 + c:199
     Mod2 + XF86TouchpadToggle
-"(xbacklight -inc 20)"
+"(xbacklight -inc 10)"
     m:0x0 + c:233
     XF86MonBrightnessUp
-"(xbacklight -dec 20)"
+"(xbacklight -dec 10)"
     m:0x0 + c:232
     XF86MonBrightnessDown

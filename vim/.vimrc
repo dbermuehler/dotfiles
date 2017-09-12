@@ -180,6 +180,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'alcesleo/vim-uppercase-sql'
     Plug 'junegunn/fzf.vim'
     Plug 'vimwiki/vimwiki'
+    Plug 'tell-k/vim-autopep8'
 
     " Syntax Plugins
     Plug 'Matt-Deacalion/vim-systemd-syntax'
@@ -259,6 +260,8 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     " Custome key mappings
     map <F2> :Tagbar<CR>
     map ° :Ag <c-r>=expand("<cword>")<cr><cr>
+
+    let g:autopep8_disable_show_diff=1
 endif
 
 try
