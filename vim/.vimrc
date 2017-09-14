@@ -74,9 +74,7 @@ set omnifunc=syntaxcomplete#Complete
 
 let g:tex_flavor = 'latex' " set the flavor for tex files to latex for correct syntax highlighting etc.
 let g:markdown_fenced_languages = ['xml', 'html', 'sql', 'python', 'java', 'tex', 'bash=sh', 'javascript', 'js=javascript'] " enables syntax highlighting for these languages in markdown code blocks
-
 let g:netrw_browsex_viewer = "xdg-open"
-
 let g:xml_syntax_folding=1
 
 augroup filetype_settings
@@ -117,9 +115,6 @@ map <silent> <leader>s :setlocal invspell spell?<CR>
 map <silent> <leader>r :source ~/.vimrc<CR>
 map <leader>p :set invpaste paste?<CR>
 
-" on the qwertz keyboard ctrl-y is a harder to reach then on a qwerty keyboard
-noremap <silent> <C-z> <C-y>
-
 function! Run(...)
     let args = ''
     for i in a:000
@@ -155,7 +150,6 @@ endfunction
 command! -nargs=* Run call Run(<f-args>)
 
 if filereadable($VIMHOME."/autoload/plug.vim")
-
     let g:plug_threads = 50
 
     " Plug Settings
@@ -166,6 +160,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'scrooloose/syntastic'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-fugitive'
     Plug 'jiangmiao/auto-pairs'
     Plug 'honza/vim-snippets'
     Plug 'tmhedberg/matchit'
@@ -173,10 +168,8 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'airblade/vim-gitgutter'
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'gastonsimone/vim-dokumentary'
-    Plug 'MattesGroeger/vim-bookmarks'
     Plug 'matze/vim-move'
     Plug 'alcesleo/vim-uppercase-sql'
-    Plug 'junegunn/fzf.vim'
     Plug 'vimwiki/vimwiki'
     Plug 'tell-k/vim-autopep8'
     Plug 'andrewradev/sideways.vim'
@@ -184,7 +177,6 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     " Syntax Plugins
     Plug 'Matt-Deacalion/vim-systemd-syntax'
     Plug 'ivalkeen/vim-simpledb'
-    Plug 'tfnico/vim-gradle'
     Plug 'chikamichi/mediawiki.vim'
 
     if v:version >= 704
@@ -215,11 +207,6 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     let g:syntastic_check_on_wq = 0
 
     let g:move_key_modifier = 'C'
-
-    " let g:NERDTreeWinSize = 25
-    " let g:NERDTreeWinPos = 'right'
-    " let g:NERDTreeMinimalUI = 1
-    " let g:NERDTreeHighlightCursorline = 1
 
     let g:neocomplete#enable_at_startup = 0
     let g:neocomplete#enable_smart_case = 1
