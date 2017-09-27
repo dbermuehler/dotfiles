@@ -7,6 +7,7 @@ lan_inf = ${xrdb:polybar*lan_inf:enp6s0}
 wlan_inf = ${xrdb:polybar*wlan_inf:wlp2s0}
 battery = ${xrdb:polybar*battery:BAT1}
 adapter = ${xrdb:polybar*adapter:ADP1}
+tether_inf = ${xrdb:polybar*tether_inf:usb0}
 
 [colors]
 background = #111111
