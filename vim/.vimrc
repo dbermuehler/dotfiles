@@ -157,7 +157,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
 
     " load Plugins
     Plug 'majutsushi/tagbar'
-    Plug 'scrooloose/syntastic'
+    Plug 'w0rp/ale'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-fugitive'
