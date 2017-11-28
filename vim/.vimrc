@@ -171,8 +171,9 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'matze/vim-move'
     Plug 'alcesleo/vim-uppercase-sql'
     Plug 'vimwiki/vimwiki'
-    Plug 'tell-k/vim-autopep8'
     Plug 'andrewradev/sideways.vim'
+    Plug 'mechatroner/rainbow_csv'
+    Plug 'junegunn/goyo.vim'
 
     " Syntax Plugins
     Plug 'Matt-Deacalion/vim-systemd-syntax'
@@ -247,7 +248,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     map <F2> :Tagbar<CR>
     map ° :Ag <c-r>=expand("<cword>")<cr><cr>
 
-    let g:autopep8_disable_show_diff=1
+    let g:ale_fixers = {'python': ['autopep8']}
 
     nnoremap <c-h> :SidewaysLeft<cr>
     nnoremap <c-l> :SidewaysRight<cr>
