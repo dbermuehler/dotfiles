@@ -157,7 +157,6 @@ if filereadable($VIMHOME."/autoload/plug.vim")
 
     " load Plugins
     Plug 'majutsushi/tagbar'
-    Plug 'w0rp/ale'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-fugitive'
@@ -190,6 +189,10 @@ if filereadable($VIMHOME."/autoload/plug.vim")
         if has('lua')
             Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
         endif
+    endif
+
+    if v:version >= 800
+        Plug 'w0rp/ale'
     endif
 
     " Colorschemes
@@ -249,6 +252,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     map ° :Ag <c-r>=expand("<cword>")<cr><cr>
 
     let g:ale_fixers = {'python': ['autopep8']}
+    let g:ale_python_flake8_args="--ignore=E501"
 
     nnoremap <c-h> :SidewaysLeft<cr>
     nnoremap <c-l> :SidewaysRight<cr>
