@@ -1,4 +1,4 @@
-; Requirements: polybar-git, ttf-font-awesome, wirless_tools, ttf-inconsolata, openconnect (for vpn), wally (with nitrogen)
+; Requirements: polybar-git, ttf-font-awesome, wirless_tools, ttf-inconsolata, openconnect (for vpn), wally (Bash script written by me. Needs nitrogen)
 
 [config]
 monitor = ${xrdb:polybar*monitor:LVDS-1}
@@ -26,7 +26,9 @@ foreground = ${colors.foreground}
 module-margin-right = 1
 
 font-0 = Inconsolata:pixelsize=14
-font-1 = FontAwesome:pixelsize=14
+font-1 = "Font Awesome 5 Free:style=Regular:pixelsize=14;1"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=14;1"
+font-3 = "Font Awesome 5 Brands:pixelsize=14;1"
 
 modules-left = ewmh
 modules-center = vpn tether wlan eth battery volume date time wallpaper
@@ -151,7 +153,7 @@ label-active-background = #fff
 [module/wallpaper]
 type = custom/script
 exec = "wally -r"
-interval = 1800
+interval = 300
 label =
 
 [settings]

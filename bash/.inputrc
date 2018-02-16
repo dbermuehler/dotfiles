@@ -7,14 +7,9 @@ set show-all-if-ambiguous on
 set skip-completed-text on
 set blink-matching-paren on
 
-# space will perform an history expansion, e.g. !!<space> will expand to the last command
-#space:magic-space
-
 # activate vi mode
 set editing-mode vi
 set keymap vi-insert
-# map Alt-. to paste last argument from last command in history
-"\e.":yank-last-arg
 # map ctrl-l to clear screen so that it will work in vi mode
 Control-l: clear-screen
 

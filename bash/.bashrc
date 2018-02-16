@@ -2,22 +2,36 @@
 #                     Variables                    #
 #--------------------------------------------------#
 
-export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+export PATH+=":$HOME/bin:$HOME/.local/bin"
 export PROMPT_DIRTRIM=3
 export EDITOR=vim
 export VISUAL=vim
 export BC_ENV_ARGS=~/.bcrc
 
+#--------------------------------------------------#
+#                       Prompt                     #
+#--------------------------------------------------#
+
 if [ "$SSH_CONNECTION" ]; then
     PROMPT_HOSTNAME=" | \\h"
 fi
-if [ "$UID" -ne 0 ]; then
-    PROMPT_COLOR="\[\033[38;5;81m\]"
+
+COLOR_CYAN="\\[\\033[38;5;81m\\]"
+COLOR_RED="\\[\\033[38;5;160m\\]"
+RESET_COLOR="\\[$(tput sgr0)\\]"
+
+if [ "$(whoami)" = "root" ]; then
+    PROMPT_COLOR=$COLOR_RED
 else
-    PROMPT_COLOR="\[\033[38;5;160m\]"
+    PROMPT_COLOR=$COLOR_CYAN
 fi
 
-export PS1=" \w$PROMPT_HOSTNAME$PROMPT_COLOR > \[$(tput sgr0)\]"
+if [ -e "/usr/share/git/completion/git-prompt.sh" ]; then
+    source /usr/share/git/completion/git-prompt.sh
+    GIT_PROMPT="\$(__git_ps1 ' (%s)')"
+fi
+
+export PS1=" \\w${PROMPT_HOSTNAME}${GIT_PROMPT}${PROMPT_COLOR} > ${RESET_COLOR}"
 
 #--------------------------------------------------#
 #                     Aliases                      #
@@ -28,11 +42,8 @@ alias grep='grep --color=auto'
 alias mkdir='mkdir -p'
 alias cp='cp -r'
 alias vim='vim -p'
-alias hg='history | grep' # may conflict with Mercurial, but since I'm not using it this will be no problem
-alias pps='ps -o "pid cmd" -fx'
 alias vim_private="vim -i NONE --cmd 'set noswapfile' --cmd 'set nobackup' --noplugin"
 alias bc='bc -l'
-alias htop='htop -d 10' # starts htop with an update intervall of 1000 ms
 alias doch='su -c "$(history -p !-1)"'
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip'
 
@@ -53,7 +64,7 @@ shopt -s cmdhist # save all lines of a multiple-line command in the same history
 #                 Tab Completion                   #
 #--------------------------------------------------#
 
-[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+[ -e /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
 
 complete -cf spawn
 
@@ -88,12 +99,6 @@ sp(){
     fi
 }
 
-if ! which psgrep >& /dev/null; then
-    psgrep() {
-        ps -o "pid user:10 tty cmd" -ax | grep "$@" | grep -v grep
-    }
-fi
-
 spawn() {
     ("$@" &) ; exit
 }
@@ -104,9 +109,9 @@ calc() {
 
 battery() {
     if [ -e "/sys/class/power_supply/BAT0" ]; then
-        BAT_PATH="/sys/class/power_supply/BAT0"
+        local BAT_PATH="/sys/class/power_supply/BAT0"
     else
-        BAT_PATH="/sys/class/power_supply/BAT1"
+        local BAT_PATH="/sys/class/power_supply/BAT1"
     fi
 
     CAPACITY="$(< $BAT_PATH/capacity)%"
@@ -146,4 +151,4 @@ fi
 #              Import local settings               #
 #--------------------------------------------------#
 
-[ -f ~/.bashrc.local ] && . ~/.bashrc.local
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local
