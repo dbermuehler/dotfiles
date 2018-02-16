@@ -46,6 +46,7 @@ alias vim_private="vim -i NONE --cmd 'set noswapfile' --cmd 'set nobackup' --nop
 alias bc='bc -l'
 alias doch='su -c "$(history -p !-1)"'
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip'
+alias htop='htop -d 10' # starts htop with an update intervall of 1000 ms
 
 #--------------------------------------------------#
 #                 History Settings                 #
