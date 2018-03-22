@@ -134,6 +134,46 @@ activate() {
     source ~/PythonEnv/"$1"/bin/activate
 }
 
+p() {
+    # Search and open recently opened PDFs with zathura.
+    DEPENDENCIES=( 'fzf' 'zathura' 'pdfinfo' )
+
+    for DEPENDENCY in "${DEPENDENCIES[@]}"; do
+        if [ ! "$(command -v "$DEPENDENCY")" ]; then
+            echo "$DEPENDENCY is not install. Please install it first to use this function."
+            return 1
+        fi
+    done
+
+    awk 'BEGIN {
+        RS="\n\n"
+        FS="\n"
+        OFS="\t"
+    }
+    {
+        gsub(/\[|\]|time=/,"")
+    }
+    /^[^#]/ {
+        print $10,$1 | "sort -k 1 -r "
+    }' "$HOME/.local/share/zathura/history" |
+    cut -f2- |
+
+    while read -r PDF_PATH; do
+        [ -e "$PDF_PATH" ] && echo "$PDF_PATH";
+    done |
+
+    fzf --multi \
+        --exit-0 \
+        --select-1 \
+        --query="$*" \
+        --cycle \
+        --height=100 \
+        --preview-window=down:4 \
+        --preview="pdfinfo {} | grep --color=never -E '^(Title|Subject|Keywords|Author):[ ]+[^ ]'" |
+
+    xargs --no-run-if-empty -i zathura --fork '{}'
+}
+
 #--------------------------------------------------#
 #                     Misc                         #
 #--------------------------------------------------#

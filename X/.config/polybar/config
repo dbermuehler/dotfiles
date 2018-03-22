@@ -59,8 +59,8 @@ label = %{F#b3b3b3}VPN:%{F-}%output%
 
 [module/tether]
 type = custom/script
-exec-if = "ls /sys/class/net/usb0"
-exec = "ip addr show dev usb0 | sed -nr 's/.+inet ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).+/\1/p'"
+exec-if = "[ "$(ip link show enp0s26u1u2 | sed -nr 's/.+state ([^ ]+) .+/\1/p')" = "UNKNOWN" ]"
+exec = "ip addr show dev enp0s26u1u2 | sed -nr 's/.+inet ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).+/\1/p'"
 interval = 5
 label = %{F#b3b3b3}Tethering IP:%{F-}%output%
 
@@ -87,7 +87,7 @@ format-prefix = "Time:"
 format-prefix-foreground = ${colors.foreground-alt}
 
 [module/volume]
-type = internal/volume
+type = internal/alsa
 
 format-volume-prefix = "Vol:"
 format-volume-prefix-foreground = ${colors.foreground-alt}
@@ -153,7 +153,7 @@ label-active-background = #fff
 [module/wallpaper]
 type = custom/script
 exec = "wally -r"
-interval = 300
+interval = 900
 label =
 
 [settings]
