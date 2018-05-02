@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eo pipefail
+
 NITROGEN_CFG="$HOME/.config/nitrogen/bg-saved.cfg"
 WALLPAPER_IMAGE="$(sed -nr 's/file=(.+)/\1/p' "$NITROGEN_CFG" | head -n 1)"
 WALLPAPER_FOLDER="$(dirname "$WALLPAPER_IMAGE")"

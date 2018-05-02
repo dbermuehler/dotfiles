@@ -130,10 +130,6 @@ battery() {
     esac
 }
 
-activate() {
-    source ~/PythonEnv/"$1"/bin/activate
-}
-
 p() {
     # Search and open recently opened PDFs with zathura.
     DEPENDENCIES=( 'fzf' 'zathura' 'pdfinfo' )

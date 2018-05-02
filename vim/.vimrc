@@ -15,14 +15,13 @@ set backspace=indent,eol,start " allow backspacing over autoindent, line breaks 
 set history=50
 set fileformats=unix,dos
 set mouse=a " enables mouse support in all modes
-set clipboard=unnamed " access X clipboard via the * and + register
+set clipboard=unnamed " access X clipboard via the * and + registera, vim needs to be compiled with this feature
 set hidden " Allow switching edited buffers without saving
 set undofile " activates persistent undo
 set undodir=~/.vimundo/ " if undofile is activated, a directory is needed where the undofiles are stored
-set tags=./tags;
 set completeopt=menu,preview,longest
 set autoread " if a file outside of the current vim session is modified it can be read in by :checktime, see :help E321
-set modelines=1 " activate per file settings
+set modelines=1 " activate per-file-settings
 set path=$PWD/**
 set autochdir
 
@@ -207,8 +206,6 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     let g:UltiSnipsSnippetDirectories=["UltiSnips", "$VIMHOME/plugged/vim-snippets/UltiSnips"]
 
     let g:vimwiki_list = [{'path': '$HOME/Dropbox/wiki'}]
-
-    let g:syntastic_check_on_wq = 0
 
     let g:move_key_modifier = 'C'
 

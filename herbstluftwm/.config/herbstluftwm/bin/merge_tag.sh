@@ -1,10 +1,12 @@
 #!/bin/bash
 
-toMerge=$(herbstclient attr tags.focus.name)
+set -eo pipefail
 
-if [[ "$toMerge" -eq 1 || "$toMerge" -eq 2 ]] ; then
+TAG_TO_MERGE=$(herbstclient attr tags.focus.name)
+
+if [[ "$TAG_TO_MERGE" -eq "1" || "$TAG_TO_MERGE" -eq "2" ]] ; then
     exit
 fi
 
 herbstclient use_index -1 --skip-visible
-herbstclient merge_tag "$toMerge"
+herbstclient merge_tag "$TAG_TO_MERGE"

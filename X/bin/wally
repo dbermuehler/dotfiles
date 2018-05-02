@@ -1,19 +1,21 @@
 #!/bin/bash
 
+set -eo pipefail
+
 WALLPAPER_FOLDER="$HOME/.wallpaper"
 
 random() {
-    wallpaper=$(shuf -n 1 -e $WALLPAPER_FOLDER/*.{jpg,png})
-    sed -i "s|file=.*$|file=$wallpaper|" ~/.config/nitrogen/bg-saved.cfg
+    local WALLPAPER_PATH=$(shuf -n 1 -e $WALLPAPER_FOLDER/*.{jpg,png})
+    set_wall "$WALLPAPER_PATH"
+}
+
+set_wall() {
+    local WALLPAPER_PATH="$(realpath $1)"
+    sed -i "s|file=.*$|file=$WALLPAPER_PATH|" ~/.config/nitrogen/bg-saved.cfg
     nitrogen --restore
 }
 
-setWall() {
-    sed -i "s|file=.*$|file=$(realpath "$1")|" ~/.config/nitrogen/bg-saved.cfg
-    nitrogen --restore
-}
-
-curWall() {
+cur_wall() {
     sed -nr 's/file=(.+)/\1/p' ~/.config/nitrogen/bg-saved.cfg | head -n 1
 }
 
@@ -22,15 +24,15 @@ help() {
 }
 
 if [ -e "$1" ]; then
-    setWall "$1"
+    set_wall "$1"
     exit
 fi
 
 case "$1" in
     "-r"|"--random") random ;;
-    "-s"|"--set") setWall "$2" ;;
+    "-s"|"--set") set_wall "$2" ;;
     "-h"|"--help") help ;;
-    "-c"|"--current") curWall ;;
-    *) curWall ;;
+    "-c"|"--current") cur_wall ;;
+    *) cur_wall ;;
 esac
 
