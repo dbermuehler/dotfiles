@@ -1,10 +1,10 @@
-"(amixer set Master 2%-;volnoti-osd.sh)"
+"(amixer set Master 2%-)"
     m:0x0 + c:122
     XF86AudioLowerVolume
-"(amixer set Master 2%+;volnoti-osd.sh)"
+"(amixer set Master 2%+)"
     m:0x0 + c:123
     XF86AudioRaiseVolume
-"(amixer set Master toggle;volnoti-osd.sh)"
+"(amixer set Master toggle)"
     m:0x0 + c:121
     XF86AudioMute
 "(mpc toggle)"
