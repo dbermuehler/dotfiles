@@ -37,10 +37,12 @@ xterm*foreground: #ffffff
 
 ! URxvt Configs
 ! For the following URxvt config entries you need the perl scripts mentioned in the next line.
-URxvt.perl-ext: default,url-select,keyboard-select,font-size,clipboard
+URxvt.perl-ext: default,url-select,keyboard-select,resize-font,clipboard
 
-URxvt.keysym.C-Up: perl:font-size:increase
-URxvt.keysym.C-Down: perl:font-size:decrease
+URxvt.keysym.C-minus:     resize-font:smaller
+URxvt.keysym.C-plus:      resize-font:bigger
+URxvt.keysym.C-equal:     resize-font:reset
+URxvt.keysym.C-question:  resize-font:show
 
 URxvt.keysym.C-Escape: perl:keyboard-select:activate
 URxvt.keysym.C-7: perl:keyboard-select:search
