@@ -3,7 +3,11 @@
 set -eo pipefail
 
 FIRST_MONITOR="$(xrandr | sed -nr 's/(LVDS-*[0-9]).+/\1/p')"
-SECOND_MONITOR="$(xrandr | sed -nr 's/(VGA-*[0-9]).+/\1/p')"
+SECOND_MONITOR="$(xrandr | sed -nr 's/((VGA-*[0-9])|(HDMI-*[0-9])) connected.+/\1/p')"
+
+second_monitor_state() {
+    xrandr | sed -nr "s/$SECOND_MONITOR (connected|disconnected) .+/\1/p"
+}
 
 hc() {
     herbstclient "$@"
@@ -11,7 +15,7 @@ hc() {
 
 up() {
     xrandr --auto
-    xrandr --output "$SECOND_MONITOR" --above $FIRST_MONITOR
+    xrandr --output "$SECOND_MONITOR" --above "$FIRST_MONITOR"
     hc pad 0 0
     hc pad 1 25
     hc emit_hook monitor_changed
@@ -19,7 +23,7 @@ up() {
 
 down() {
     xrandr --auto
-    xrandr --output "$SECOND_MONITOR" --below $FIRST_MONITOR
+    xrandr --output "$SECOND_MONITOR" --below "$FIRST_MONITOR"
     hc pad 1 0
     hc pad 0 25
     hc emit_hook monitor_changed
@@ -27,7 +31,7 @@ down() {
 
 right() {
     xrandr --auto
-    xrandr --output "$SECOND_MONITOR" --right-of $FIRST_MONITOR
+    xrandr --output "$SECOND_MONITOR" --right-of "$FIRST_MONITOR"
     hc pad 1 0
     hc pad 0 25
     hc emit_hook monitor_changed
@@ -35,7 +39,7 @@ right() {
 
 left() {
     xrandr --auto
-    xrandr --output "$SECOND_MONITOR" --left-of $FIRST_MONITOR
+    xrandr --output "$SECOND_MONITOR" --left-of "$FIRST_MONITOR"
     hc pad 1 0
     hc pad 0 25
     hc emit_hook monitor_changed
@@ -49,11 +53,11 @@ single() {
 }
 
 auto() {
-    local MONITOR_CONNECTION_STATUS="$(cat /sys/class/drm/card1-$SECOND_MONITOR/status)"
+    local MONITOR_CONNECTION_STATUS="$(second_monitor_state)"
     if [[ "$MONITOR_CONNECTION_STATUS" = "disconnect" ]] ; then
         single
     else
-        right
+        left
     fi
 }
 
