@@ -154,24 +154,31 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     " Plug Settings
     call plug#begin($VIMHOME."/plugged")
 
-    " load Plugins
-    Plug 'majutsushi/tagbar'
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-surround'
     Plug 'tpope/vim-fugitive'
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'honza/vim-snippets'
-    Plug 'tmhedberg/matchit'
+    Plug 'gastonsimone/vim-dokumentary'
+    Plug 'vimwiki/vimwiki'
+
+    " UI Plugins
+    Plug 'majutsushi/tagbar'
+    Plug 'junegunn/goyo.vim'
     Plug 'inside/vim-search-pulse'
     Plug 'airblade/vim-gitgutter'
+
+    " Editing Plugins
+    Plug 'tpope/vim-surround'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'honza/vim-snippets'
     Plug 'ntpeters/vim-better-whitespace'
-    Plug 'gastonsimone/vim-dokumentary'
+    Plug 'tpope/vim-commentary'
+
+    " Movement Plugins
     Plug 'matze/vim-move'
-    Plug 'alcesleo/vim-uppercase-sql'
-    Plug 'vimwiki/vimwiki'
     Plug 'andrewradev/sideways.vim'
+    Plug 'tmhedberg/matchit'
+
+    " Language Plugins
     Plug 'mechatroner/rainbow_csv'
-    Plug 'junegunn/goyo.vim'
+    Plug 'alcesleo/vim-uppercase-sql'
 
     " Syntax Plugins
     Plug 'Matt-Deacalion/vim-systemd-syntax'
@@ -183,6 +190,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
 
         if has('python')
             Plug 'SirVer/ultisnips'
+            Plug 'davidhalter/jedi-vim'
         endif
 
         if has('lua')
