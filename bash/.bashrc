@@ -26,8 +26,8 @@ else
     PROMPT_COLOR=$COLOR_CYAN
 fi
 
-if [ -e "/usr/share/git/completion/git-prompt.sh" ]; then
-    source /usr/share/git/completion/git-prompt.sh
+if [ -e "/usr/lib/git-core/git-sh-prompt" ]; then
+    source /usr/lib/git-core/git-sh-prompt
     GIT_PROMPT="\$(__git_ps1 ' (%s)')"
 fi
 
