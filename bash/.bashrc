@@ -26,8 +26,14 @@ else
     PROMPT_COLOR=$COLOR_CYAN
 fi
 
-if [ -e "/usr/lib/git-core/git-sh-prompt" ]; then
-    source /usr/lib/git-core/git-sh-prompt
+GIT_PROMPT_PATHS=("/usr/share/git/git-prompt.sh" "/usr/lib/git-core/git-sh-prompt" )
+
+for path in "${GIT_PROMPT_PATHS[@]}"; do
+    [ -e "$path" ] && GIT_PROMPT_PATH="$path"
+done
+
+if [ -e "$GIT_PROMPT_PATH" ]; then
+    source "$GIT_PROMPT_PATH"
     GIT_PROMPT="\$(__git_ps1 ' (%s)')"
 fi
 

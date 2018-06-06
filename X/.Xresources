@@ -80,6 +80,6 @@ URxvt*scrollTtyKeypress: true
 
 ! For these setting to work, you must use a version patched with xrdb support, like dmenu2.
 ! See http://tools.suckless.org/dmenu/patches/xrdb
-dmenu.font: -xos4-terminus-medium-r-*-*-12-*
+dmenu.font: xft:Inconsolata:size=10
 dmenu.selforeground: black
 dmenu.selbackground: white
