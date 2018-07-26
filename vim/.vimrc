@@ -17,13 +17,17 @@ set fileformats=unix,dos
 set mouse=a " enables mouse support in all modes
 set clipboard=unnamed " access X clipboard via the * and + registera, vim needs to be compiled with this feature
 set hidden " Allow switching edited buffers without saving
-set undofile " activates persistent undo
-set undodir=~/.vimundo/ " if undofile is activated, a directory is needed where the undofiles are stored
 set completeopt=menu,preview,longest
 set autoread " if a file outside of the current vim session is modified it can be read in by :checktime, see :help E321
 set modelines=1 " activate per-file-settings
 set path=$PWD/**
 set autochdir
+
+if !isdirectory($HOME.'/.vimundo/')
+    call mkdir($HOME.'/.vimundo/', "p")
+endif
+set undofile " activates persistent undo
+set undodir=~/.vimundo/ " if undofile is activated, a directory is needed where the undofiles are stored
 
 " vim gui stuff
 set showmatch " show matching brackets/parenthesis
@@ -162,12 +166,13 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'tpope/vim-fugitive'
     Plug 'gastonsimone/vim-dokumentary'
     Plug 'vimwiki/vimwiki'
+    Plug 'AndrewRadev/undoquit.vim'
 
     " UI Plugins
     Plug 'majutsushi/tagbar'
     Plug 'junegunn/goyo.vim'
     Plug 'inside/vim-search-pulse'
-    Plug 'airblade/vim-gitgutter'
+    Plug 'mhinz/vim-signify'
 
     " Editing Plugins
     Plug 'tpope/vim-surround'
@@ -175,6 +180,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'honza/vim-snippets'
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'tpope/vim-commentary'
+    Plug 'junegunn/vim-easy-align'
 
     " Movement Plugins
     Plug 'matze/vim-move'
@@ -192,6 +198,9 @@ if filereadable($VIMHOME."/autoload/plug.vim")
 
     if v:version >= 704
         set breakindent
+
+        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+        Plug 'junegunn/fzf.vim'
 
         if has('python')
             Plug 'SirVer/ultisnips'
@@ -262,10 +271,15 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     map ° :Ag <c-r>=expand("<cword>")<cr><cr>
 
     let g:ale_fixers = {'python': ['autopep8']}
-    let g:ale_python_flake8_args="--ignore=E501"
+    let g:ale_python_flake8_options="--ignore=E501"
 
     nnoremap <c-h> :SidewaysLeft<cr>
     nnoremap <c-l> :SidewaysRight<cr>
+
+    " Start interactive EasyAlign in visual mode (e.g. vipga)
+    xmap ga <Plug>(EasyAlign)
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)
 endif
 
 try
