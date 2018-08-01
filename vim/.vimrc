@@ -203,8 +203,10 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     if v:version >= 704
         set breakindent
 
-        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-        Plug 'junegunn/fzf.vim'
+        if has('unix') || has ('macunix')
+            Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+            Plug 'junegunn/fzf.vim'
+        endif
 
         if has('python')
             Plug 'SirVer/ultisnips'
