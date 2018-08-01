@@ -1,9 +1,11 @@
 if has('win32') || has ('win64')
     let $VIMHOME = $HOME."/vimfiles"
     let $MDCTAGS = $HOME."/bin/markdown2ctags.py"
+    let $PATHSEPERATOR = "\\"
 else
     let $VIMHOME = $HOME."/.vim"
     let $MDCTAGS = "/usr/bin/markdown2ctags"
+    let $PATHSEPERATOR = "/"
 endif
 
 " Settings
@@ -104,7 +106,8 @@ set spelllang=de,en_gb
 
 " Custome key mappings
 nnoremap <leader>b :ls<CR>:b<Space>
-nnoremap <leader>w :let @* = expand("%:p")<CR>:echo "Copied filepath to clipboard..."<CR>
+nnoremap <leader>wf :let @* = expand("%:p")<CR>:echo "Copied current filepath to clipboard..."<CR>
+nnoremap <leader>wd :let @* = getcwd() . $PATHSEPERATOR<CR>:echo "Copied current working dir path to clipboard..."<CR>
 
 " use the arrow key to move between windows
 nnoremap <Left> <C-w>h
