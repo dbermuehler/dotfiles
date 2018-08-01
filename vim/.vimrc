@@ -104,6 +104,7 @@ set spelllang=de,en_gb
 
 " Custome key mappings
 nnoremap <leader>b :ls<CR>:b<Space>
+nnoremap <leader>w :let @* = expand("%:p")<CR>:echo "Copied filepath to clipboard..."<CR>
 
 " use the arrow key to move between windows
 nnoremap <Left> <C-w>h
