@@ -177,6 +177,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'junegunn/goyo.vim'
     Plug 'inside/vim-search-pulse'
     Plug 'mhinz/vim-signify'
+    Plug 'scrooloose/nerdtree'
 
     " Editing Plugins
     Plug 'tpope/vim-surround'
@@ -194,6 +195,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     " Language Plugins
     Plug 'mechatroner/rainbow_csv'
     Plug 'alcesleo/vim-uppercase-sql'
+    Plug 'posva/vim-vue'
 
     " Syntax Plugins
     Plug 'Matt-Deacalion/vim-systemd-syntax'
@@ -286,6 +288,9 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     xmap ga <Plug>(EasyAlign)
     " Start interactive EasyAlign for a motion/text object (e.g. gaip)
     nmap ga <Plug>(EasyAlign)
+    let g:jedi#use_splits_not_buffers = "left"
+
+    noremap <F3> :NERDTreeToggle<CR>
 endif
 
 try
