@@ -19,7 +19,12 @@ fi
 
 COLOR_CYAN="\\[\\033[38;5;81m\\]"
 COLOR_RED="\\[\\033[38;5;160m\\]"
-RESET_COLOR="\\[$(tput sgr0)\\]"
+
+if tty -s; then
+    RESET_COLOR="\\[$(tput sgr0)\\]"
+else
+    RESET_COLOR="\\[$(echo -en "\e[0m")\\]"
+fi
 
 if [ "$(whoami)" = "root" ]; then
     PROMPT_COLOR=$COLOR_RED

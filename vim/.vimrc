@@ -98,7 +98,7 @@ augroup filetype_settings
     autocmd BufRead,BufNewFile Dockerfile* setlocal tabstop=2
     autocmd BufRead,BufNewFile Dockerfile* setlocal shiftwidth=2
 
-    autocmd BufRead,BufNewFile *.tsv setlocal set noexpandtab
+    autocmd BufRead,BufNewFile *.tsv setlocal noexpandtab
 augroup END
 
 " spell checking
