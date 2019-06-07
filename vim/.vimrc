@@ -87,6 +87,10 @@ augroup filetype_settings
     autocmd FileType sql setlocal commentstring=--\ %s
     autocmd FileType xdefaults setlocal commentstring=\!\ %s
     autocmd FileType xml setlocal foldmethod=syntax
+
+    autocmd FileType json setlocal tabstop=2
+    autocmd FileType json setlocal shiftwidth=2
+
     " Set correct filetype for external editing of the commandline content when invoking 'v' in bashs vi mode
     autocmd BufRead,BufNewFile bash-fc-* setlocal filetype=sh
     autocmd BufRead,BufNewFile *Xresources.local setlocal filetype=xdefaults
@@ -97,6 +101,9 @@ augroup filetype_settings
     autocmd BufRead,BufNewFile Dockerfile* setlocal filetype=dockerfile
     autocmd BufRead,BufNewFile Dockerfile* setlocal tabstop=2
     autocmd BufRead,BufNewFile Dockerfile* setlocal shiftwidth=2
+
+    autocmd BufRead,BufNewFile .eslintrc setlocal tabstop=2
+    autocmd BufRead,BufNewFile .eslintrc setlocal shiftwidth=2
 
     autocmd BufRead,BufNewFile *.tsv setlocal noexpandtab
 augroup END
