@@ -67,6 +67,7 @@ alias htop='htop -d 10' # starts htop with an update intervall of 1000 ms
 export HISTCONTROL="ignorespace:ignoredups" # ignores duplicates and commands with space at the beginning
 export HISTIGNORE='clear:history' # ignores the commands clear and history
 export HISTSIZE="10000000"
+export HISTTIMEFORMAT="%y-%m-%d %T "
 export PROMPT_COMMAND='history -a' # add history entry to history file after each command and not after exiting the shell
 shopt -s histappend # append history to history file and don't override it
 shopt -s histreedit # allows to re-edit a failed history substitution
