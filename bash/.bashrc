@@ -50,6 +50,7 @@ export PS1=" \\w${PROMPT_HOSTNAME}${GIT_PROMPT}${PROMPT_COLOR} > ${RESET_COLOR}"
 #--------------------------------------------------#
 
 alias ls='ls --color=auto'
+alias sl='ls'
 alias grep='grep --color=auto'
 alias mkdir='mkdir -p'
 alias cp='cp -r'
