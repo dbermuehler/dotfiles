@@ -60,6 +60,7 @@ alias bc='bc -l'
 alias doch='su -c "$(history -p !-1)"'
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip'
 alias htop='htop -d 10' # starts htop with an update intervall of 1000 ms
+alias pgrep='pgrep -f'
 
 #--------------------------------------------------#
 #                 History Settings                 #
@@ -67,7 +68,7 @@ alias htop='htop -d 10' # starts htop with an update intervall of 1000 ms
 
 export HISTCONTROL="ignorespace:ignoredups" # ignores duplicates and commands with space at the beginning
 export HISTIGNORE='clear:history' # ignores the commands clear and history
-export HISTSIZE="10000000"
+export HISTSIZE="1000000000000000000000000"
 export HISTTIMEFORMAT="%y-%m-%d %T "
 export PROMPT_COMMAND='history -a' # add history entry to history file after each command and not after exiting the shell
 shopt -s histappend # append history to history file and don't override it
@@ -100,12 +101,19 @@ function cd() {
         clear
         builtin cd "$@" && pwd && ls;
     fi
+
+    # Automatic virtualenv sourcing
+    #if command -v pipenv > /dev/null && [ -f "Pipfile" ]; then
+    #    if [ ! "$PIPENV_ACTIVE" ]; then
+    #        pipenv shell
+    #    fi
+    #fi
 }
 
 sp(){
     if [[ "$1" = "-d" ]] ; then
         [[ "$PWD" = "/tmp/scratchpad" ]] && cd
-        rm -r /tmp/scratchpad
+        rm -rf /tmp/scratchpad
         return 0
     else
         [[ ! -d /tmp/scratchpad ]] && mkdir /tmp/scratchpad
