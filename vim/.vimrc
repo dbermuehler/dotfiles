@@ -105,11 +105,6 @@ augroup filetype_settings
     autocmd BufRead,BufNewFile *.tsv setlocal noexpandtab
 augroup END
 
-" spell checking
-set thesaurus+=$VIMHOME/thesaurus-de.txt
-set thesaurus+=$VIMHOME/thesaurus-en.txt
-set spelllang=de,en_gb
-
 " Custome key mappings
 nnoremap <leader>b :ls<CR>:b<Space>
 nnoremap <leader>wf :let @* = expand("%:p")<CR>:echo "Copied current filepath to clipboard..."<CR>
@@ -141,23 +136,12 @@ function! Run(...)
 
     execute "write"
 
-    if &filetype == "java"
-        execute "make"
-        execute "!java " . args . " " . expand("%:r")
-    elseif &filetype == "tex"
-        execute "silent !zathura --fork " . args . " " . expand("%:r") . ".pdf >& /dev/null"
-    elseif &filetype == "sh"
+    if &filetype == "sh"
         execute "!bash "  . args . " " . expand("%")
     elseif &filetype == "python"
         execute "!python " . args . " " . expand ("%")
     elseif &filetype == "html"
         execute "silent! !xdg-open " . expand("%") . " >& /dev/null"
-    elseif &filetype =~ "markdown.*"
-        if &makeprg =~ "pandoc .* -t revealjs .*"
-            execute "silent! !xdg-open " . expand("%:r") . ".html >& /dev/null"
-        else
-            execute "silent !xdg-open " . args . " " . expand("%:r") . ".pdf >& /dev/null"
-        endif
     else
         echoerr "Error: Run() isn't defined for this filetype."
     endif
@@ -173,40 +157,22 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     " Plug Settings
     call plug#begin($VIMHOME."/plugged")
 
-    Plug 'tpope/vim-fugitive'
-    Plug 'gastonsimone/vim-dokumentary'
-    Plug 'vimwiki/vimwiki'
-    Plug 'AndrewRadev/undoquit.vim'
-
     " UI Plugins
     Plug 'majutsushi/tagbar'
-    Plug 'junegunn/goyo.vim'
     Plug 'inside/vim-search-pulse'
     Plug 'mhinz/vim-signify'
-    Plug 'scrooloose/nerdtree'
 
     " Editing Plugins
-    Plug 'tpope/vim-surround'
     Plug 'jiangmiao/auto-pairs'
-    Plug 'honza/vim-snippets'
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'tpope/vim-commentary'
-    Plug 'junegunn/vim-easy-align'
 
     " Movement Plugins
     Plug 'matze/vim-move'
     Plug 'andrewradev/sideways.vim'
-    Plug 'tmhedberg/matchit'
-
-    " Language Plugins
-    Plug 'mechatroner/rainbow_csv'
-    Plug 'alcesleo/vim-uppercase-sql'
-    Plug 'posva/vim-vue'
 
     " Syntax Plugins
     Plug 'Matt-Deacalion/vim-systemd-syntax'
-    Plug 'ivalkeen/vim-simpledb'
-    Plug 'chikamichi/mediawiki.vim'
 
     if v:version >= 704
         set breakindent
@@ -215,18 +181,6 @@ if filereadable($VIMHOME."/autoload/plug.vim")
             Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
             Plug 'junegunn/fzf.vim'
         endif
-
-        if has('python')
-            Plug 'SirVer/ultisnips'
-        endif
-
-        if has('lua')
-            Plug 'Shougo/neocomplete.vim', {'on':'NeoCompleteEnable'}
-        endif
-    endif
-
-    if v:version >= 800
-        Plug 'w0rp/ale'
     endif
 
     " Colorschemes
@@ -235,32 +189,11 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     call plug#end()
 
     " Plugin settings
-    let g:UltiSnipsEditSplit = "horizontal"
-    let g:UltiSnipsJumpForwardTrigger = "<tab>"
-    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-    let g:UltiSnipsSnippetDirectories=["UltiSnips", "$VIMHOME/plugged/vim-snippets/UltiSnips"]
-
-    let g:vimwiki_list = [{'path': '$HOME/Dropbox/wiki'}]
-
     let g:move_key_modifier = 'C'
-
-    let g:neocomplete#enable_at_startup = 0
-    let g:neocomplete#enable_smart_case = 1
-
-    let g:simpledb_show_timing = 0
 
     let g:tagbar_left = 1
     let g:tagbar_width = 25
     let g:tagbar_zoomwidth = 50
-    let g:tagbar_type_bib = {
-        \ 'ctagstype' : 'bibtex',
-        \ 'kinds'     : [
-            \ 'e:entries',
-            \ 'a:authors',
-            \ 't:titles',
-        \ ],
-        \ 'sort'    : 0,
-    \ }
 
     if filereadable($MDCTAGS)
         let g:tagbar_type_markdown = {
@@ -283,19 +216,8 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     map <F2> :Tagbar<CR>
     map ° :Ag <c-r>=expand("<cword>")<cr><cr>
 
-    let g:ale_fixers = {'python': ['autopep8']}
-    let g:ale_python_flake8_options="--ignore=E501"
-
     nnoremap <c-h> :SidewaysLeft<cr>
     nnoremap <c-l> :SidewaysRight<cr>
-
-    " Start interactive EasyAlign in visual mode (e.g. vipga)
-    xmap ga <Plug>(EasyAlign)
-    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-    nmap ga <Plug>(EasyAlign)
-    let g:jedi#use_splits_not_buffers = "left"
-
-    noremap <F3> :NERDTreeToggle<CR>
 endif
 
 try

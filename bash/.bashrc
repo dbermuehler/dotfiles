@@ -126,32 +126,6 @@ spawn() {
     ("$@" &) ; exit
 }
 
-calc() {
-    bc -l <<< "$@"
-}
-
-battery() {
-    if [ -e "/sys/class/power_supply/BAT0" ]; then
-        local BAT_PATH="/sys/class/power_supply/BAT0"
-    else
-        local BAT_PATH="/sys/class/power_supply/BAT1"
-    fi
-
-    CAPACITY="$(< $BAT_PATH/capacity)%"
-
-    case "$(cat $BAT_PATH/status)" in
-        Discharging)
-            echo "$CAPACITY discharging"
-            ;;
-        Charging)
-            echo "$CAPACITY charging"
-            ;;
-        *)
-            echo "Fully charged"
-            ;;
-    esac
-}
-
 p() {
     # Search and open recently opened PDFs with zathura.
     DEPENDENCIES=( 'fzf' 'zathura' 'pdfinfo' )
