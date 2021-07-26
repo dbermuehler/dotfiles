@@ -1,13 +1,10 @@
+[ -e $HOME/.shell_common ] && source $HOME/.shell_common
+
 #--------------------------------------------------#
 #                     Variables                    #
 #--------------------------------------------------#
 
-export PATH+=":$HOME/bin:$HOME/.local/bin"
 export PROMPT_DIRTRIM=3
-export EDITOR=vim
-export VISUAL=vim
-export BC_ENV_ARGS=~/.bcrc
-export FZF_DEFAULT_OPTS='--height 75% --reverse'
 
 #--------------------------------------------------#
 #                       Prompt                     #
@@ -46,23 +43,6 @@ fi
 export PS1=" \\w${PROMPT_HOSTNAME}${GIT_PROMPT}${PROMPT_COLOR} > ${RESET_COLOR}"
 
 #--------------------------------------------------#
-#                     Aliases                      #
-#--------------------------------------------------#
-
-alias ls='ls --color=auto'
-alias sl='ls'
-alias grep='grep --color=auto'
-alias mkdir='mkdir -p'
-alias cp='cp -r'
-alias vim='vim -p'
-alias vim_private="vim -i NONE --cmd 'set noswapfile' --cmd 'set nobackup' --noplugin"
-alias bc='bc -l'
-alias doch='su -c "$(history -p !-1)"'
-alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip'
-alias htop='htop -d 10' # starts htop with an update intervall of 1000 ms
-alias pgrep='pgrep -f'
-
-#--------------------------------------------------#
 #                 History Settings                 #
 #--------------------------------------------------#
 
@@ -85,88 +65,6 @@ shopt -s cmdhist # save all lines of a multiple-line command in the same history
 complete -cf spawn
 
 #--------------------------------------------------#
-#                    Functions                     #
-#--------------------------------------------------#
-
-# draw a horizontal line
-hr(){
-    yes -- "${@:-"-"}" | tr -d $'\n' | head -c $COLUMNS
-}
-
-function cd() {
-    if [[ -z "$*" ]]; then
-        clear
-        builtin cd
-    else
-        clear
-        builtin cd "$@" && pwd && ls;
-    fi
-
-    # Automatic virtualenv sourcing
-    #if command -v pipenv > /dev/null && [ -f "Pipfile" ]; then
-    #    if [ ! "$PIPENV_ACTIVE" ]; then
-    #        pipenv shell
-    #    fi
-    #fi
-}
-
-sp(){
-    if [[ "$1" = "-d" ]] ; then
-        [[ "$PWD" = "/tmp/scratchpad" ]] && cd
-        rm -rf /tmp/scratchpad
-        return 0
-    else
-        [[ ! -d /tmp/scratchpad ]] && mkdir /tmp/scratchpad
-        cp "$1" /tmp/scratchpad
-        cd /tmp/scratchpad
-    fi
-}
-
-spawn() {
-    ("$@" &) ; exit
-}
-
-p() {
-    # Search and open recently opened PDFs with zathura.
-    DEPENDENCIES=( 'fzf' 'zathura' 'pdfinfo' )
-
-    for DEPENDENCY in "${DEPENDENCIES[@]}"; do
-        if [ ! "$(command -v "$DEPENDENCY")" ]; then
-            echo "$DEPENDENCY is not install. Please install it first to use this function."
-            return 1
-        fi
-    done
-
-    awk 'BEGIN {
-        RS="\n\n"
-        FS="\n"
-        OFS="\t"
-    }
-    {
-        gsub(/\[|\]|time=/,"")
-    }
-    /^[^#]/ {
-        print $10,$1 | "sort -k 1 -r "
-    }' "$HOME/.local/share/zathura/history" |
-    cut -f2- |
-
-    while read -r PDF_PATH; do
-        [ -e "$PDF_PATH" ] && echo "$PDF_PATH";
-    done |
-
-    fzf --multi \
-        --exit-0 \
-        --select-1 \
-        --query="$*" \
-        --cycle \
-        --height=100 \
-        --preview-window=down:4 \
-        --preview="pdfinfo {} | grep --color=never -E '^(Title|Subject|Keywords|Author):[ ]+[^ ]'" |
-
-    xargs --no-run-if-empty -i zathura --fork '{}'
-}
-
-#--------------------------------------------------#
 #                     Misc                         #
 #--------------------------------------------------#
 
@@ -184,5 +82,5 @@ fi
 #              Import local settings               #
 #--------------------------------------------------#
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -f ~/.bashrc.local ] && source ~/.bashrc.local
+[ -e $HOME/.fzf.bash ] && source $HOME/.fzf.bash
+[ -e $HOME/.bashrc.local ] && source $HOME/.bashrc.local
