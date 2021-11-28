@@ -59,3 +59,8 @@ sp(){
 spawn() {
     ("$@" &) ; exit
 }
+
+pp_json() {
+    local FILE=${1:--}
+    python3 -m json.tool $FILE
+}

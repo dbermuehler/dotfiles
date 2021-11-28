@@ -73,6 +73,7 @@ set smarttab " backspace over tabs
 set autoindent
 set copyindent " copy the previous indentation on autoindenting
 syntax on
+set re=0 " Use new regular expression engine to speed up syntax highlighting e.g. of typescript
 filetype plugin on " apply settings based on filetype
 filetype indent on " indention for known file extensions
 set omnifunc=syntaxcomplete#Complete
@@ -150,6 +151,7 @@ function! Run(...)
 endfunction
 
 command! -nargs=* Run call Run(<f-args>)
+command! PrettifyJson execute '%!python3 -m json.tool'
 
 if filereadable($VIMHOME."/autoload/plug.vim")
     let g:plug_threads = 50
