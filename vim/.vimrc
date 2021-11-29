@@ -180,7 +180,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
         set breakindent
 
         if has('unix') || has ('macunix')
-            Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+            Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
             Plug 'junegunn/fzf.vim'
         endif
     endif

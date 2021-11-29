@@ -13,6 +13,7 @@ zplug "plugins/dirhistory", from:oh-my-zsh
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "jeffreytse/zsh-vi-mode"
+zplug "junegunn/fzf", as:command, hook-build:"./install --bin", use:"bin/{fzf-tmux,fzf}", dir:"$HOME/.fzf"
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8c8c8c"
