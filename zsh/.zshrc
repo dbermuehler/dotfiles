@@ -1,8 +1,10 @@
 # Install zplug plugin manager
 [[ ! -d $HOME/.zplug ]] && git clone https://github.com/zplug/zplug $HOME/.zplug
-source ~/.zplug/init.zsh
+source $HOME/.zplug/init.zsh
 
 ### Plugins ###
+
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
@@ -13,8 +15,9 @@ zplug "plugins/dirhistory", from:oh-my-zsh
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "jeffreytse/zsh-vi-mode"
+
 zplug "junegunn/fzf", as:command, hook-build:"./install --bin", use:"bin/{fzf-tmux,fzf}", dir:"$HOME/.fzf"
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug "so-fancy/diff-so-fancy", as:command
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8c8c8c"
 ZSH_AUTOSUGGEST_STRATEGY=(completion)
