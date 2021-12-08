@@ -8,9 +8,13 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/copyfile", from:oh-my-zsh
 zplug "plugins/copydir", from:oh-my-zsh
 zplug "plugins/dirhistory", from:oh-my-zsh
+zplug "plugins/branch", from:oh-my-zsh
+zplug "plugins/copybuffer", from:oh-my-zsh
+
+zplug "lib/completion", from:oh-my-zsh
+zplug "lib/clipboard", from:oh-my-zsh
 
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
@@ -42,6 +46,23 @@ function zvm_after_lazy_keybindings() {
 
 setopt APPEND_HISTORY
 setopt PROMPT_SUBST
-PROMPT='%(5~|%-1~/.../%3~|%4~) %{$fg[cyan]%}>%{$reset_color%} '
+
+my_prompt() {
+    local CURRENT_DIR="%(5~|%-1~/.../%3~|%4~)"
+    PROMPT="$CURRENT_DIR "
+
+    if [ -n "$VIRTUAL_ENV" ]; then
+        PROMPT+="($(echo $VIRTUAL_ENV | sed -E 's/.+\/(.+)-.+(-[0-9]+)?$/\1/')) "
+    fi
+
+    local GIT_PROMPT="$(branch_prompt_info)"
+    if [ -n "$GIT_PROMPT" ]; then
+        PROMPT+="($GIT_PROMPT) "
+    fi
+
+    local PROMPT_DELIMITER="%{$fg[cyan]%}>%{$reset_color%}"
+    PROMPT+="$PROMPT_DELIMITER "
+}
+precmd_functions+=(my_prompt)
 
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
