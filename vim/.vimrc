@@ -91,6 +91,9 @@ augroup filetype_settings
 
     autocmd FileType {json,yaml} setlocal tabstop=2
     autocmd FileType {json,yaml} setlocal shiftwidth=2
+    autocmd FileType {json,yaml} setlocal foldmethod=syntax
+    autocmd FileType {json,yaml} setlocal foldlevelstart=99
+    autocmd FileType {json,yaml} normal zR
 
     " Set correct filetype for external editing of the commandline content when invoking 'v' in bashs vi mode
     autocmd BufRead,BufNewFile bash-fc-* setlocal filetype=sh
