@@ -8,7 +8,7 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/copydir", from:oh-my-zsh
+zplug "plugins/copypath", from:oh-my-zsh
 zplug "plugins/dirhistory", from:oh-my-zsh
 zplug "plugins/branch", from:oh-my-zsh
 zplug "plugins/copybuffer", from:oh-my-zsh
