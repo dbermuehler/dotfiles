@@ -44,7 +44,13 @@ function zvm_after_lazy_keybindings() {
 
 [ -f $HOME/.shell_common ] && source $HOME/.shell_common
 
-setopt APPEND_HISTORY
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+
+# Prompt
 setopt PROMPT_SUBST
 
 my_prompt() {
