@@ -54,8 +54,22 @@ setopt SHARE_HISTORY
 setopt PROMPT_SUBST
 
 my_prompt() {
-    local CURRENT_DIR="%(5~|%-1~/.../%3~|%4~)"
+    local CURRENT_DIR="%(5~|%-1~/.../%3~|%~)"
     PROMPT="$CURRENT_DIR "
+
+    if [[ -n "$AWS_ASSUMED_ROLE" && -n "$AWS_ACCOUNT_NAME" && -n "$AWS_EXPIRATION_DATE" ]]; then
+        local SECONDS_UNTIL_EXPIRED
+        local AWS_PROMPT
+        (( SECONDS_UNTIL_EXPIRED = $(strftime -r "%Y-%m-%dT%H:%M:%S+02:00" $AWS_EXPIRATION_DATE) - $(date +%s) ))
+
+        if [ $SECONDS_UNTIL_EXPIRED -lt 0 ]; then
+            AWS_PROMPT="[EXPIRED] "
+        else
+            AWS_PROMPT="[${AWS_ASSUMED_ROLE}@${AWS_ACCOUNT_NAME}] "
+        fi
+
+        PROMPT+=$AWS_PROMPT
+    fi
 
     if [ -n "$VIRTUAL_ENV" ]; then
         PROMPT+="($(echo $VIRTUAL_ENV | sed -E 's/.+\/(.+)-.+(-[0-9]+)?$/\1/')) "

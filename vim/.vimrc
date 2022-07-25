@@ -178,6 +178,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
 
     " Syntax Plugins
     Plug 'Matt-Deacalion/vim-systemd-syntax'
+    Plug 'martinda/Jenkinsfile-vim-syntax'
 
     if v:version >= 704
         set breakindent
