@@ -85,4 +85,6 @@ my_prompt() {
 }
 precmd_functions+=(my_prompt)
 
+setopt NO_AUTO_MENU
+
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
