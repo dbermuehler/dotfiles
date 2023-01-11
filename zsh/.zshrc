@@ -46,8 +46,8 @@ function zvm_after_lazy_keybindings() {
 
 # History
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=10000000
+SAVEHIST=10000000
 setopt SHARE_HISTORY
 
 # Prompt
@@ -60,7 +60,7 @@ my_prompt() {
     if [[ -n "$AWS_ASSUMED_ROLE" && -n "$AWS_ACCOUNT_NAME" && -n "$AWS_EXPIRATION_DATE" ]]; then
         local SECONDS_UNTIL_EXPIRED
         local AWS_PROMPT
-        (( SECONDS_UNTIL_EXPIRED = $(strftime -r "%Y-%m-%dT%H:%M:%S+02:00" $AWS_EXPIRATION_DATE) - $(date +%s) ))
+        (( SECONDS_UNTIL_EXPIRED = $(strftime -r "%Y-%m-%dT%H:%M:%S%z" $(echo $AWS_EXPIRATION_DATE | sed -nr 's/(.+)\+(.+):(.+)/\1+\2\3/p')) - $(date +%s) ))
 
         if [ $SECONDS_UNTIL_EXPIRED -lt 0 ]; then
             AWS_PROMPT="[EXPIRED] "

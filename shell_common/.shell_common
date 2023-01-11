@@ -24,6 +24,7 @@ alias doch='su -c "$(history -p !-1)"'
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip'
 alias htop='htop -d 10' # starts htop with an update intervall of 1000 ms
 alias pgrep='pgrep -f'
+alias tldrf='tldr --list | fzf --preview "tldr {1} --color=always" --preview-window=right,70% | xargs tldr'
 
 #--------------------------------------------------#
 #                    Functions                     #

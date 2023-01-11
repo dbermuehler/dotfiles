@@ -111,8 +111,8 @@ augroup END
 
 " Custome key mappings
 nnoremap <leader>b :ls<CR>:b<Space>
-nnoremap <leader>wf :let @* = expand("%:p")<CR>:echo "Copied current filepath to clipboard..."<CR>
-nnoremap <leader>wd :let @* = getcwd() . $PATHSEPERATOR<CR>:echo "Copied current working dir path to clipboard..."<CR>
+nnoremap <leader>cf :let @* = expand("%:p")<CR>:echo "Copied current filepath to clipboard..."<CR>
+nnoremap <leader>cd :let @* = getcwd() . $PATHSEPERATOR<CR>:echo "Copied current working dir path to clipboard..."<CR>
 
 " use the arrow key to move between windows
 nnoremap <Left> <C-w>h
@@ -132,29 +132,7 @@ map <silent> <leader>s :setlocal invspell spell?<CR>
 map <silent> <leader>r :source ~/.vimrc<CR>
 map <leader>p :set invpaste paste?<CR>
 
-function! Run(...)
-    let args = ''
-    for i in a:000
-       let args = args . ' ' . i
-    endfor
-
-    execute "write"
-
-    if &filetype == "sh"
-        execute "!bash "  . args . " " . expand("%")
-    elseif &filetype == "python"
-        execute "!python " . args . " " . expand ("%")
-    elseif &filetype == "html"
-        execute "silent! !xdg-open " . expand("%") . " >& /dev/null"
-    else
-        echoerr "Error: Run() isn't defined for this filetype."
-    endif
-
-    execute "redraw!"
-endfunction
-
-command! -nargs=* Run call Run(<f-args>)
-command! PrettifyJson execute '%!python3 -m json.tool'
+command! Json execute '%!python3 -m json.tool'
 
 if filereadable($VIMHOME."/autoload/plug.vim")
     let g:plug_threads = 50
