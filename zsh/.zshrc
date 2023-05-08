@@ -12,6 +12,7 @@ zplug "plugins/copypath", from:oh-my-zsh
 zplug "plugins/dirhistory", from:oh-my-zsh
 zplug "plugins/branch", from:oh-my-zsh
 zplug "plugins/copybuffer", from:oh-my-zsh
+zplug "agkozak/zsh-z"
 
 zplug "lib/completion", from:oh-my-zsh
 zplug "lib/clipboard", from:oh-my-zsh
@@ -63,21 +64,21 @@ my_prompt() {
         (( SECONDS_UNTIL_EXPIRED = $(strftime -r "%Y-%m-%dT%H:%M:%S%z" $(echo $AWS_EXPIRATION_DATE | sed -nr 's/(.+)\+(.+):(.+)/\1+\2\3/p')) - $(date +%s) ))
 
         if [ $SECONDS_UNTIL_EXPIRED -lt 0 ]; then
-            AWS_PROMPT="[EXPIRED] "
+            AWS_PROMPT="| ☁️  (EXPIRED) "
         else
-            AWS_PROMPT="[${AWS_ASSUMED_ROLE}@${AWS_ACCOUNT_NAME}] "
+            AWS_PROMPT="| ☁️  (${AWS_ASSUMED_ROLE}@${AWS_ACCOUNT_NAME}) "
         fi
 
         PROMPT+=$AWS_PROMPT
     fi
 
     if [ -n "$VIRTUAL_ENV" ]; then
-        PROMPT+="($(echo $VIRTUAL_ENV | sed -E 's/.+\/(.+)-.+(-[0-9]+)?$/\1/')) "
+        PROMPT+="| 🐍 v$PYENV_VERSION ($(basename $VIRTUAL_ENV | sed -nr 's/([^-]+).+/\1/p')) "
     fi
 
     local GIT_PROMPT="$(branch_prompt_info)"
     if [ -n "$GIT_PROMPT" ]; then
-        PROMPT+="($GIT_PROMPT) "
+        PROMPT+="| ($GIT_PROMPT) "
     fi
 
     local PROMPT_DELIMITER="%{$fg[cyan]%}>%{$reset_color%}"

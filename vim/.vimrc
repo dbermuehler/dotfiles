@@ -164,8 +164,6 @@ if filereadable($VIMHOME."/autoload/plug.vim")
         if has('unix') || has ('macunix')
             Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
             Plug 'junegunn/fzf.vim'
-
-            imap <c-x><c-f> <plug>(fzf-complete-path)
         endif
     endif
 
