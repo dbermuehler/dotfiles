@@ -19,7 +19,7 @@ set clipboard=unnamed " access X clipboard via the * and + registera, vim needs 
 set hidden " Allow switching edited buffers without saving
 set completeopt=menu,preview,longest
 set autoread " if a file outside of the current vim session is modified it can be read in by :checktime, see :help E321
-set modelines=1 " activate per-file-settings
+set nomodeline " deactivate setting vim options in the same file you want to edit -> might pose a security threat
 set path=$PWD/**
 set autochdir
 
@@ -27,7 +27,7 @@ if !isdirectory($HOME.'/.vimundo/')
     call mkdir($HOME.'/.vimundo/', "p")
 endif
 set undofile " activates persistent undo
-set undodir=~/.vimundo/ " if undofile is activated, a directory is needed where the undofiles are stored
+set undodir=~/.vimundo/ " directory in which the undofiles are stored
 
 " vim gui stuff
 set showmatch " show matching brackets/parenthesis
@@ -40,7 +40,6 @@ set scrolloff=3 " shows the next or previous 3 lines under or above the cursor
 set scroll=10
 set novisualbell
 set t_Co=256 " activate 256 color support if your terminal supports it and haven't configured to use it
-"set listchars=tab:>-,trail:.,eol:$ " characters for tab, trailing spaces and eol when activate 'set list'
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " characters for tab, eol, etc. when activate 'set list'
 set lazyredraw " Dont update viewport until the marco has completed for faster processing.
 set background=dark
@@ -74,7 +73,6 @@ filetype plugin on " apply settings based on filetype
 filetype indent on " indention for known file extensions
 set omnifunc=syntaxcomplete#Complete
 
-let g:tex_flavor = 'latex' " set the flavor for tex files to latex for correct syntax highlighting etc.
 let g:markdown_fenced_languages = ['xml', 'html', 'sql', 'python', 'json', 'yaml', 'bash=sh', 'javascript', 'js=javascript'] " enables syntax highlighting for these languages in markdown code blocks
 let g:netrw_browsex_viewer = "xdg-open"
 let g:xml_syntax_folding=1
