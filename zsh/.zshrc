@@ -73,7 +73,13 @@ my_prompt() {
     fi
 
     if [ -n "$VIRTUAL_ENV" ]; then
-        PROMPT+="| 🐍 v$PYENV_VERSION ($(basename $VIRTUAL_ENV | sed -nr 's/([^-]+).+/\1/p')) "
+        local PYTHON_PROMPT="| 🐍"
+        if [ -n "$PYENV_VERSION" ]; then
+            PYTHON_PROMPT+=" v$PYENV_VERSION"
+        fi
+        PYTHON_PROMPT+=" ($(basename $VIRTUAL_ENV | sed -nr 's/([^-]+).+/\1/p')) "
+
+        PROMPT+="$PYTHON_PROMPT"
     fi
 
     local GIT_PROMPT="$(branch_prompt_info)"
