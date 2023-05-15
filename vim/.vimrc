@@ -1,13 +1,3 @@
-if has('win32') || has ('win64')
-    let $VIMHOME = $HOME."/vimfiles"
-    let $MDCTAGS = $HOME."/bin/markdown2ctags.py"
-    let $PATHSEPERATOR = "\\"
-else
-    let $VIMHOME = $HOME."/.vim"
-    let $MDCTAGS = "/usr/bin/markdown2ctags"
-    let $PATHSEPERATOR = "/"
-endif
-
 " Settings
 set encoding=utf-8
 set noswapfile
@@ -54,8 +44,6 @@ set linebreak
 set wildmenu
 set wildmode=longest:full,full " first tab complete only longest common string, second tab complete to first element in list
 set wildignorecase " completion on files in command mode is now case insensitive
-set wildignore+=*.aux,*.toc " LaTeX intermediate files
-set wildignore+=*.class " java class files
 
 " searching
 set incsearch " find as you type search
@@ -79,7 +67,7 @@ filetype indent on " indention for known file extensions
 set omnifunc=syntaxcomplete#Complete
 
 let g:tex_flavor = 'latex' " set the flavor for tex files to latex for correct syntax highlighting etc.
-let g:markdown_fenced_languages = ['xml', 'html', 'sql', 'python', 'java', 'tex', 'bash=sh', 'javascript', 'js=javascript'] " enables syntax highlighting for these languages in markdown code blocks
+let g:markdown_fenced_languages = ['xml', 'html', 'sql', 'python', 'json', 'yaml', 'bash=sh', 'javascript', 'js=javascript'] " enables syntax highlighting for these languages in markdown code blocks
 let g:netrw_browsex_viewer = "xdg-open"
 let g:xml_syntax_folding=1
 
@@ -102,11 +90,6 @@ augroup filetype_settings
     autocmd BufRead,BufNewFile Dockerfile* setlocal filetype=dockerfile
     autocmd BufRead,BufNewFile Dockerfile* setlocal tabstop=2
     autocmd BufRead,BufNewFile Dockerfile* setlocal shiftwidth=2
-
-    autocmd BufRead,BufNewFile .eslintrc setlocal tabstop=2
-    autocmd BufRead,BufNewFile .eslintrc setlocal shiftwidth=2
-
-    autocmd BufRead,BufNewFile *.tsv setlocal noexpandtab
 augroup END
 
 " Custome key mappings
@@ -141,7 +124,6 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     call plug#begin($VIMHOME."/plugged")
 
     " UI Plugins
-    Plug 'majutsushi/tagbar'
     Plug 'inside/vim-search-pulse'
     Plug 'mhinz/vim-signify'
 
@@ -150,12 +132,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'tpope/vim-commentary'
 
-    " Movement Plugins
-    Plug 'matze/vim-move'
-    Plug 'andrewradev/sideways.vim'
-
     " Syntax Plugins
-    Plug 'Matt-Deacalion/vim-systemd-syntax'
     Plug 'martinda/Jenkinsfile-vim-syntax'
 
     if v:version >= 704
@@ -171,37 +148,6 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'w0ng/vim-hybrid'
 
     call plug#end()
-
-    " Plugin settings
-    let g:move_key_modifier = 'C'
-
-    let g:tagbar_left = 1
-    let g:tagbar_width = 25
-    let g:tagbar_zoomwidth = 50
-
-    if filereadable($MDCTAGS)
-        let g:tagbar_type_markdown = {
-            \ 'ctagstype': 'markdown',
-            \ 'ctagsbin' : $MDCTAGS,
-            \ 'ctagsargs' : '-f - --sort=yes',
-            \ 'kinds' : [
-                \ 's:sections',
-                \ 'i:images'
-            \ ],
-            \ 'sro' : '|',
-            \ 'kind2scope' : {
-                \ 's' : 'section',
-            \ },
-            \ 'sort': 0,
-        \ }
-    endif
-
-    " Custome key mappings
-    map <F2> :Tagbar<CR>
-    map ° :Ag <c-r>=expand("<cword>")<cr><cr>
-
-    nnoremap <c-h> :SidewaysLeft<cr>
-    nnoremap <c-l> :SidewaysRight<cr>
 endif
 
 try
