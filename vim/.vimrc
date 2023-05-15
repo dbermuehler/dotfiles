@@ -1,3 +1,11 @@
+if has('win32') || has ('win64')
+    let $VIMHOME = $HOME."/vimfiles"
+    let $PATHSEPERATOR = "\\"
+else
+    let $VIMHOME = $HOME."/.vim"
+    let $PATHSEPERATOR = "/"
+endif
+
 " Settings
 set encoding=utf-8
 set noswapfile
