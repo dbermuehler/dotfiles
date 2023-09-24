@@ -137,6 +137,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'jiangmiao/auto-pairs'
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'tpope/vim-commentary'
+    Plug 'github/copilot.vim'
 
     " Syntax Plugins
     Plug 'martinda/Jenkinsfile-vim-syntax'
@@ -151,13 +152,21 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     endif
 
     " Colorschemes
-    Plug 'w0ng/vim-hybrid'
+    Plug 'kristijanhusak/vim-hybrid-material'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#show_buffers = 0
+    let g:airline_theme='hybrid'
+    let g:airline_powerline_fonts = 1
 
     call plug#end()
 endif
 
 try
-    colorscheme hybrid
+    let g:enable_italic_font = 1
+    colorscheme hybrid_material
 catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme desert
 endtry

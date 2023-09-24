@@ -8,10 +8,7 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/copypath", from:oh-my-zsh
-zplug "plugins/dirhistory", from:oh-my-zsh
 zplug "plugins/branch", from:oh-my-zsh
-zplug "plugins/copybuffer", from:oh-my-zsh
 zplug "agkozak/zsh-z"
 
 zplug "lib/completion", from:oh-my-zsh
@@ -41,15 +38,12 @@ function zvm_after_lazy_keybindings() {
   bindkey -M viins '^[^[[D' dirhistory_back
 }
 
-### User configuration ###
-
-[ -f $HOME/.shell_common ] && source $HOME/.shell_common
-
 # History
 HISTFILE=~/.zsh_history
 HISTSIZE=10000000
 SAVEHIST=10000000
 setopt SHARE_HISTORY
+setopt HIST_IGNORE_SPACE
 
 # Prompt
 setopt PROMPT_SUBST
@@ -94,4 +88,5 @@ precmd_functions+=(my_prompt)
 
 setopt NO_AUTO_MENU
 
+[ -f $HOME/.shell_common ] && source $HOME/.shell_common
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
