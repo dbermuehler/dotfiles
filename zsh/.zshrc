@@ -6,7 +6,6 @@ source $HOME/.zplug/init.zsh
 
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/branch", from:oh-my-zsh
 zplug "agkozak/zsh-z"
@@ -58,12 +57,12 @@ my_prompt() {
         (( SECONDS_UNTIL_EXPIRED = $(strftime -r "%Y-%m-%dT%H:%M:%S%z" $(echo $AWS_EXPIRATION_DATE | sed -nr 's/(.+)\+(.+):(.+)/\1+\2\3/p')) - $(date +%s) ))
 
         if [ $SECONDS_UNTIL_EXPIRED -lt 0 ]; then
-            AWS_PROMPT="| ☁️  (EXPIRED) "
+            AWS_PROMPT="| ☁️  (EXPIRED)"
         else
-            AWS_PROMPT="| ☁️  (${AWS_ASSUMED_ROLE}@${AWS_ACCOUNT_NAME}) "
+            AWS_PROMPT="| ☁️  (${AWS_ASSUMED_ROLE}@${AWS_ACCOUNT_NAME})"
         fi
 
-        PROMPT+=$AWS_PROMPT
+        PROMPT+="$AWS_PROMPT "
     fi
 
     if [ -n "$VIRTUAL_ENV" ]; then
