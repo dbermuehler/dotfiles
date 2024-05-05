@@ -63,6 +63,7 @@ sp(){
                 echo "Usage: sp [options] (SCRATCHPAD_NAME)"
                 echo "Options:"
                 echo "  -d, --delete    Delete the scratchpad SCRATCHPAD_NAME"
+                echo "  -l, --list      List all scratchpads in the /tmp/scratchpad dir"
                 return 0
                 ;;
             -*|--*)
