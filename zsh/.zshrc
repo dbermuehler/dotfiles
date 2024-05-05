@@ -28,7 +28,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(completion)
 if ! zplug check; then zplug install; fi
 zplug load
 
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+zvm_after_init_commands+=('[ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh')
 function zvm_after_lazy_keybindings() {
   zvm_define_widget dirhistory_forward
   zvm_define_widget dirhistory_back
@@ -87,5 +87,9 @@ precmd_functions+=(my_prompt)
 
 setopt NO_AUTO_MENU
 
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 [ -f $HOME/.shell_common ] && source $HOME/.shell_common
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

@@ -46,22 +46,53 @@ function cd() {
 }
 
 sp(){
-    if [[ "$1" = "-d" ]] ; then
-        [[ "$PWD" = "/tmp/scratchpad" ]] && cd
-        rm -rf /tmp/scratchpad
+    local SCRATCHPAD_NAME=""
+    local DELETE_SCRATCHPAD="false"
+
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            -d|--delete)
+                DELETE_SCRATCHPAD="true"
+                shift
+                ;;
+            -l|--list)
+                ls -1 /tmp/scratchpad
+                return 0
+                ;;
+            -h|--help)
+                echo "Usage: sp [options] (SCRATCHPAD_NAME)"
+                echo "Options:"
+                echo "  -d, --delete    Delete the scratchpad SCRATCHPAD_NAME"
+                return 0
+                ;;
+            -*|--*)
+                echo "Unknown option $1"
+                return 1
+                ;;
+            *)
+                SCRATCHPAD_NAME="$1"
+                shift
+                ;;
+        esac
+    done
+
+    [ -z "$SCRATCHPAD_NAME" ] && SCRATCHPAD_NAME=$(date "+%Y-%m-%d")
+
+    if [ "$DELETE_SCRATCHPAD" = "true" ]; then
+        rm -rf "/tmp/scratchpad/$SCRATCHPAD_NAME"
+        echo "Deleting scratchpad $SCRATCHPAD_NAME..."
         return 0
-    else
-        [[ ! -d /tmp/scratchpad ]] && mkdir /tmp/scratchpad
-        cp "$1" /tmp/scratchpad
-        cd /tmp/scratchpad
     fi
+
+    if [ ! -d "/tmp/scratchpad/$SCRATCHPAD_NAME" ]; then
+        echo "Creating scratchpad $SCRATCHPAD_NAME..."
+        command mkdir -p "/tmp/scratchpad/$SCRATCHPAD_NAME"
+    fi
+
+    cd "/tmp/scratchpad/$SCRATCHPAD_NAME"
 }
 
-spawn() {
-    ("$@" &) ; exit
-}
-
-pp_json() {
+json() {
     local FILE=${1:--}
     python3 -m json.tool $FILE
 }
