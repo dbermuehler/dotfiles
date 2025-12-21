@@ -11,10 +11,8 @@ set encoding=utf-8
 set noswapfile
 set nobackup
 set nowritebackup
-set backspace=indent,eol,start " allow backspacing over autoindent, line breaks and the beginning of insert mode
 set history=50
 set fileformats=unix,dos
-set mouse=a " enables mouse support in all modes
 set clipboard=unnamed " access X clipboard via the * and + registera, vim needs to be compiled with this feature
 set hidden " Allow switching edited buffers without saving
 set completeopt=menu,preview,longest
@@ -30,12 +28,7 @@ set undofile " activates persistent undo
 set undodir=~/.vimundo/ " directory in which the undofiles are stored
 
 " vim gui stuff
-set showmatch " show matching brackets/parenthesis
-set ruler " shows line numbers in statusbar
-set number " show line numbers"
-set showcmd " show entered command in normal mode
-set showmode
-set ttyfast " send more characters for redraws
+set number " show line numbers
 set scrolloff=3 " shows the next or previous 3 lines under or above the cursor
 set scroll=10
 set novisualbell
@@ -45,18 +38,13 @@ set lazyredraw " Dont update viewport until the marco has completed for faster p
 set background=dark
 
 "soft line wrap
-set wrap
 set linebreak
-
-set wildmenu
 set wildmode=longest:full,full " first tab complete only longest common string, second tab complete to first element in list
 set wildignorecase " completion on files in command mode is now case insensitive
 
 " searching
-set incsearch " find as you type search
 set ignorecase " do not search case sensitive
 set smartcase " Case sensitive if we type an uppercase
-set hlsearch
 
 " tabs -> spaces
 set expandtab " tabs will be spaces
@@ -65,12 +53,8 @@ set shiftwidth=4 " indention will be 4 spaces
 set smarttab " backspace over tabs
 
 " filetype
-set autoindent
 set copyindent " copy the previous indentation on autoindenting
-syntax on
 set re=0 " Use new regular expression engine to speed up syntax highlighting e.g. of typescript
-filetype plugin on " apply settings based on filetype
-filetype indent on " indention for known file extensions
 set omnifunc=syntaxcomplete#Complete
 
 let g:markdown_fenced_languages = ['xml', 'html', 'sql', 'python', 'json', 'yaml', 'bash=sh', 'javascript', 'js=javascript'] " enables syntax highlighting for these languages in markdown code blocks
