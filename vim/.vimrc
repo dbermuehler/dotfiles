@@ -11,13 +11,13 @@ set encoding=utf-8
 set noswapfile
 set nobackup
 set nowritebackup
-set history=50
 set fileformats=unix,dos
 set clipboard=unnamed " access X clipboard via the * and + registera, vim needs to be compiled with this feature
 set hidden " Allow switching edited buffers without saving
 set completeopt=menu,preview,longest
 set autoread " if a file outside of the current vim session is modified it can be read in by :checktime, see :help E321
-set nomodeline " deactivate setting vim options in the same file you want to edit -> might pose a security threat
+set modelines=0 " deactivates modelines for security
+set backspace
 set path=$PWD/**
 set autochdir
 
@@ -38,7 +38,8 @@ set lazyredraw " Dont update viewport until the marco has completed for faster p
 set background=dark
 
 "soft line wrap
-set linebreak
+set breakindent " wrapped lines will be visually indented
+set linebreak " do not split words when wrapping lines
 set wildmode=longest:full,full " first tab complete only longest common string, second tab complete to first element in list
 set wildignorecase " completion on files in command mode is now case insensitive
 
@@ -108,8 +109,6 @@ map <leader>p :set invpaste paste?<CR>
 command! Json execute '%!python3 -m json.tool'
 
 if filereadable($VIMHOME."/autoload/plug.vim")
-    let g:plug_threads = 50
-
     " Plug Settings
     call plug#begin($VIMHOME."/plugged")
 
@@ -126,12 +125,8 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     " Syntax Plugins
     Plug 'martinda/Jenkinsfile-vim-syntax'
 
-    if v:version >= 704
-        set breakindent
-
-        if has('unix') || has('macunix')
-            Plug 'junegunn/fzf.vim'
-        endif
+    if has('unix')
+        Plug 'junegunn/fzf.vim'
     endif
 
     " Colorschemes
