@@ -16,7 +16,7 @@ zplug "lib/clipboard", from:oh-my-zsh
 
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
-zplug "jeffreytse/zsh-vi-mode"
+zplug "softmoth/zsh-vim-mode"
 
 zplug "junegunn/fzf", as:command, hook-build:"./install --bin", use:"bin/{fzf-tmux,fzf}", dir:"$HOME/.fzf"
 zplug "so-fancy/diff-so-fancy", as:command
@@ -28,14 +28,8 @@ ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
 zplug load
 
-zvm_after_init_commands+=('[ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh')
-function zvm_after_lazy_keybindings() {
-  zvm_define_widget dirhistory_forward
-  zvm_define_widget dirhistory_back
-
-  bindkey -M viins '^[^[[C' dirhistory_forward
-  bindkey -M viins '^[^[[D' dirhistory_back
-}
+# fzf shell integration (requires fzf to be installed via Homebrew)
+eval "$(fzf --zsh)"
 
 # Directory navigation
 setopt autocd
