@@ -145,8 +145,7 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     if v:version >= 704
         set breakindent
 
-        if has('unix') || has ('macunix')
-            Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+        if has('unix') || has('macunix')
             Plug 'junegunn/fzf.vim'
         endif
     endif

@@ -8,6 +8,7 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/branch", from:oh-my-zsh
+zplug "plugins/uv", from:oh-my-zsh
 zplug "agkozak/zsh-z"
 
 zplug "lib/completion", from:oh-my-zsh
@@ -36,6 +37,13 @@ function zvm_after_lazy_keybindings() {
   bindkey -M viins '^[^[[C' dirhistory_forward
   bindkey -M viins '^[^[[D' dirhistory_back
 }
+
+# Directory navigation
+setopt autocd
+setopt autopushd
+setopt pushdignoredups
+
+alias d='dirs -v'
 
 # History
 HISTFILE=~/.zsh_history
@@ -67,17 +75,24 @@ my_prompt() {
 
     if [ -n "$VIRTUAL_ENV" ]; then
         local PYTHON_PROMPT="| 🐍"
-        if [ -n "$PYENV_VERSION" ]; then
-            PYTHON_PROMPT+=" v$PYENV_VERSION"
-        fi
-        PYTHON_PROMPT+=" ($(basename $VIRTUAL_ENV | sed -nr 's/([^-]+).+/\1/p')) "
 
+        if [[ -f "$VIRTUAL_ENV/pyvenv.cfg" ]]; then
+            # Read Python version from pyvenv.cfg
+            local PY_VERSION=$(grep -m1 '^version_info' "$VIRTUAL_ENV/pyvenv.cfg" | cut -d' ' -f3)
+            [[ -n "$PY_VERSION" ]] && PYTHON_PROMPT+=" v$PY_VERSION"
+
+            # Read venv name from prompt field
+            local VENV_NAME=$(grep -m1 '^prompt' "$VIRTUAL_ENV/pyvenv.cfg" | cut -d' ' -f3)
+            [[ -n "$VENV_NAME" ]] && PYTHON_PROMPT+=" ($VENV_NAME)"
+        fi
+
+        PYTHON_PROMPT+=" "
         PROMPT+="$PYTHON_PROMPT"
     fi
 
     local GIT_PROMPT="$(branch_prompt_info)"
     if [ -n "$GIT_PROMPT" ]; then
-        PROMPT+="| ($GIT_PROMPT) "
+        PROMPT+="| 🔀 ($GIT_PROMPT) "
     fi
 
     local PROMPT_DELIMITER="%{$fg[cyan]%}>%{$reset_color%}"
