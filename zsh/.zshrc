@@ -26,7 +26,6 @@ ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
 [ -f $HOME/.zshrc-plugins.local ] && source $HOME/.zshrc-plugins.local
 
-if ! zplug check; then zplug install; fi
 zplug load
 
 zvm_after_init_commands+=('[ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh')
@@ -65,9 +64,9 @@ my_prompt() {
         (( SECONDS_UNTIL_EXPIRED = $(strftime -r "%Y-%m-%dT%H:%M:%S%z" $(echo $AWS_EXPIRATION_DATE | sed -nr 's/(.+)\+(.+):(.+)/\1+\2\3/p')) - $(date +%s) ))
 
         if [ $SECONDS_UNTIL_EXPIRED -lt 0 ]; then
-            AWS_PROMPT="| ☁️  (EXPIRED)"
+            AWS_PROMPT="| ☁️ (EXPIRED)"
         else
-            AWS_PROMPT="| ☁️  (${AWS_ASSUMED_ROLE}@${AWS_ACCOUNT_NAME})"
+            AWS_PROMPT="| ☁️ (${AWS_ASSUMED_ROLE}@${AWS_ACCOUNT_NAME})"
         fi
 
         PROMPT+="$AWS_PROMPT "
@@ -102,9 +101,5 @@ precmd_functions+=(my_prompt)
 
 setopt NO_AUTO_MENU
 
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 [ -f $HOME/.shell_common ] && source $HOME/.shell_common
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
