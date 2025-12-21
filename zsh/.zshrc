@@ -1,35 +1,42 @@
-# Install zplug plugin manager
-[[ ! -d $HOME/.zplug ]] && git clone https://github.com/zplug/zplug $HOME/.zplug
-source $HOME/.zplug/init.zsh
+# Install zinit plugin manager
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
 ### Plugins ###
 
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+# Oh-My-Zsh plugins
+zinit snippet OMZP::branch
+zinit snippet OMZP::uv
 
-zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/branch", from:oh-my-zsh
-zplug "plugins/uv", from:oh-my-zsh
-zplug "agkozak/zsh-z"
+# Oh-My-Zsh libs
+zinit snippet OMZL::completion.zsh
+zinit snippet OMZL::clipboard.zsh
 
-zplug "lib/completion", from:oh-my-zsh
-zplug "lib/clipboard", from:oh-my-zsh
+# Completions for many CLI tools (docker, aws, jq, etc.)
+zinit ice blockf
+zinit light zsh-users/zsh-completions
 
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "softmoth/zsh-vim-mode"
+# Third-party plugins
+zinit light agkozak/zsh-z
+zinit light softmoth/zsh-vim-mode
 
-zplug "junegunn/fzf", as:command, hook-build:"./install --bin", use:"bin/{fzf-tmux,fzf}", dir:"$HOME/.fzf"
-zplug "so-fancy/diff-so-fancy", as:command
+# diff-so-fancy as command
+zinit ice as"program" pick"bin/git-dsf"
+zinit light so-fancy/diff-so-fancy
 
+zinit light zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8c8c8c"
 ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
-[ -f $HOME/.zshrc-plugins.local ] && source $HOME/.zshrc-plugins.local
+# Syntax highlighting should be loaded last
+zinit light zsh-users/zsh-syntax-highlighting
 
-zplug load
-
-# fzf shell integration (requires fzf to be installed via Homebrew)
-eval "$(fzf --zsh)"
+# fzf - install binary and shell integration
+zinit ice from"gh-r" as"program"
+zinit light junegunn/fzf
+eval "$(fzf --zsh)" # fzf shell integration (key bindings and completions)
 
 # Directory navigation
 setopt autocd

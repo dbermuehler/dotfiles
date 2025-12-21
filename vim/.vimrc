@@ -17,7 +17,6 @@ set hidden " Allow switching edited buffers without saving
 set completeopt=menu,preview,longest
 set autoread " if a file outside of the current vim session is modified it can be read in by :checktime, see :help E321
 set modelines=0 " deactivates modelines for security
-set backspace
 set path=$PWD/**
 set autochdir
 
