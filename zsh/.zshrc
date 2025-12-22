@@ -20,7 +20,6 @@ zinit light zsh-users/zsh-completions
 
 # Third-party plugins
 zinit light agkozak/zsh-z
-zinit light softmoth/zsh-vim-mode
 
 # diff-so-fancy as command
 zinit ice as"program" pick"bin/git-dsf"
@@ -51,6 +50,9 @@ HISTSIZE=10000000
 SAVEHIST=10000000
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_SPACE
+
+# vi keybindings
+bindkey -v
 
 # Prompt
 setopt PROMPT_SUBST
