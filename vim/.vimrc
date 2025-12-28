@@ -35,6 +35,7 @@ set t_Co=256 " activate 256 color support if your terminal supports it and haven
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " characters for tab, eol, etc. when activate 'set list'
 set lazyredraw " Dont update viewport until the marco has completed for faster processing.
 set background=dark
+set hlsearch
 
 "soft line wrap
 set breakindent " wrapped lines will be visually indented
