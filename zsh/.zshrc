@@ -54,6 +54,12 @@ setopt HIST_IGNORE_SPACE
 # vi keybindings
 bindkey -v
 
+# Retrain muscle memory to use nvim
+vim() {
+  echo "Use nvim instead"
+  return 1
+}
+
 # Prompt
 setopt PROMPT_SUBST
 
