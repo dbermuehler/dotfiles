@@ -82,11 +82,6 @@ augroup filetype_settings
     autocmd BufRead,BufNewFile Dockerfile* setlocal shiftwidth=2
 augroup END
 
-" Custome key mappings
-nnoremap <leader>b :ls<CR>:b<Space>
-nnoremap <leader>cf :let @* = expand("%:p")<CR>:echo "Copied current filepath to clipboard..."<CR>
-nnoremap <leader>cd :let @* = getcwd() . $PATHSEPERATOR<CR>:echo "Copied current working dir path to clipboard..."<CR>
-
 " use the arrow key to move between windows
 nnoremap <Left> <C-w>h
 nnoremap <Down> <C-w>j
@@ -120,9 +115,6 @@ if filereadable($VIMHOME."/autoload/plug.vim")
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'tpope/vim-commentary'
     Plug 'github/copilot.vim'
-
-    " Syntax Plugins
-    Plug 'martinda/Jenkinsfile-vim-syntax'
 
     if has('unix')
         Plug 'junegunn/fzf.vim'
