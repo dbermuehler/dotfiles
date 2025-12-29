@@ -35,4 +35,6 @@ require("lazy").setup({
     enabled = true,
     notify = false,
   },
+  -- disable config change detection notifications
+  change_detection = { notify = false },
 })
