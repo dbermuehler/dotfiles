@@ -1,5 +1,4 @@
 return {
-    -- UI Plugins
     "inside/vim-search-pulse",
     "mhinz/vim-signify",
     {
@@ -24,11 +23,4 @@ return {
         vim.g.airline_powerline_fonts = 1
       end,
     },
-
-    -- Editing Plugins
-    "github/copilot.vim",
-    'ntpeters/vim-better-whitespace',
-    { "numToStr/Comment.nvim", opts = {} },
-    { 'windwp/nvim-autopairs', event = "InsertEnter", opts = {} },
-    { 'junegunn/fzf.vim', dependencies = { 'junegunn/fzf' } },
 }
