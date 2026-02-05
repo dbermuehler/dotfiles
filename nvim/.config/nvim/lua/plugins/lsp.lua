@@ -14,7 +14,7 @@ return {
     dependencies = { "mason.nvim", "nvim-lspconfig" },
     opts = {
       ensure_installed = {
-        "basedpyright",
+        "ty",
         "ruff",
         "lua_ls",
         "bashls",
@@ -56,7 +56,7 @@ return {
 
       -- Enable all servers (configs are pre-populated by nvim-lspconfig)
       vim.lsp.enable({
-        "basedpyright",
+        "ty",
         "ruff",
         "lua_ls",
         "bashls",
