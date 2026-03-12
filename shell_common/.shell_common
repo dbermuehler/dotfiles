@@ -44,8 +44,10 @@ function cd() {
 }
 
 sp(){
-    local SCRATCHPAD_NAME=""
+    local COPY_PATH=""
     local DELETE_SCRATCHPAD="false"
+    local SCRATCHPAD_NAME
+    SCRATCHPAD_NAME=$(date "+%Y-%m-%d")
 
     while [[ $# -gt 0 ]]; do
         case $1 in
@@ -58,10 +60,12 @@ sp(){
                 return 0
                 ;;
             -h|--help)
-                echo "Usage: sp [options] (SCRATCHPAD_NAME)"
+                echo "Usage: sp [options] [FILE_OR_DIR]"
                 echo "Options:"
-                echo "  -d, --delete    Delete the scratchpad SCRATCHPAD_NAME"
+                echo "  -d, --delete    Delete today's scratchpad"
                 echo "  -l, --list      List all scratchpads in the /tmp/scratchpad dir"
+                echo "Arguments:"
+                echo "  FILE_OR_DIR     File or directory to copy into the scratchpad"
                 return 0
                 ;;
             -*|--*)
@@ -69,13 +73,11 @@ sp(){
                 return 1
                 ;;
             *)
-                SCRATCHPAD_NAME="$1"
+                COPY_PATH="$1"
                 shift
                 ;;
         esac
     done
-
-    [ -z "$SCRATCHPAD_NAME" ] && SCRATCHPAD_NAME=$(date "+%Y-%m-%d")
 
     if [ "$DELETE_SCRATCHPAD" = "true" ]; then
         rm -rf "/tmp/scratchpad/$SCRATCHPAD_NAME"
@@ -86,6 +88,10 @@ sp(){
     if [ ! -d "/tmp/scratchpad/$SCRATCHPAD_NAME" ]; then
         echo "Creating scratchpad $SCRATCHPAD_NAME..."
         command mkdir -p "/tmp/scratchpad/$SCRATCHPAD_NAME"
+    fi
+
+    if [ -n "$COPY_PATH" ]; then
+        cp -r "$COPY_PATH" "/tmp/scratchpad/$SCRATCHPAD_NAME/"
     fi
 
     cd "/tmp/scratchpad/$SCRATCHPAD_NAME"
